@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Lnn.mapper.UserActivityMapper">
+
+
+
+    <select id="getActivitiesByUserId" resultType="com.Lnn.vo.responseVO.ActivityVO">
+                select a.name ,a.description, a.start_time,a.end_time,ua.state
+                from `user-activity` ua left join activity a on ua.activity_id =a.id
+                where ua.user_id = #{userId}
+    </select>
+    <!-- 根据活动查询参加的用户 -->
+    <select id="getUserByActivityId" resultType="com.Lnn.vo.responseVO.UserVO">
+            select username
+            from user u left join `user-activity` ua on u.id = ua.user_id
+            where ua.activity_id = #{activityId} and ua.state = 2
+    </select>
+
+
+    <insert id="insert" useGeneratedKeys="true">
+        insert into `user-activity` (user_id, activity_id, state)
+        values (#{userId},#{activityId},#{state})
+    </insert>
+
+    <delete id="delete">
+        delete from `user-activity`
+        where activity_id = #{activityId}
+    </delete>
+
+</mapper>

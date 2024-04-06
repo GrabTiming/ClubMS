@@ -1,6 +1,9 @@
 package com.Lnn.service;
 
-import com.Lnn.entity.Activity;
+import com.Lnn.vo.responseVO.ActivityVO;
+import com.Lnn.vo.responseVO.UserVO;
+
+import java.util.List;
 
 /**
  * (Activity)表服务接口
@@ -11,5 +14,11 @@ import com.Lnn.entity.Activity;
 public interface ActivityService {
 
 
+
+    //查询活动的签到情况
+
+    //查询活动的缴费情况
+
+    //查询还在进行的活动
 
 }
