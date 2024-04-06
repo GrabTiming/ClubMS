@@ -13,7 +13,11 @@ public interface UserMapper {
     List<User>  getAllUser();
 
 
+    Integer findUserName(String username);
 
 
+    boolean addUser(String username, String password);
 
+
+    User getByUserName(String username);
 }

@@ -1,5 +1,6 @@
 package com.Lnn.service;
 
+import com.Lnn.entity.RestBean;
 import com.Lnn.entity.User;
 
 /**
@@ -10,6 +11,11 @@ import com.Lnn.entity.User;
  */
 public interface UserService {
 
+
+    //注册
+    RestBean<String> register(String username, String password);
+
+    RestBean<String> login(String username,String password);
 
 
 }

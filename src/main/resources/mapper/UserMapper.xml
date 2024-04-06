@@ -3,8 +3,27 @@
 <mapper namespace="com.Lnn.mapper.UserMapper">
 
 
+
     <select id="getAllUser" resultType="com.Lnn.entity.User">
         select * from user;
     </select>
+
+    <!-- 查找是否存在用户名 -->
+    <select id="findUserName" resultType="java.lang.Integer">
+        select count(*) from user where username = #{username} limit 1;
+    </select>
+
+    <!--通过用户名获取用户信息-->
+    <select id="getByUserName" resultType="com.Lnn.entity.User">
+        select * from user
+        where username = #{username}
+
+    </select>
+
+    <!--新增用户-->
+    <insert id="addUser" useGeneratedKeys="true">
+        insert into user (username,password,role) values
+        (#{username},#{password},0);
+    </insert>
 
 </mapper>
