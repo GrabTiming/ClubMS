@@ -1,5 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.Lnn.mapper.PaymentMapper">
+
+    <!-- 根据用户id 查询缴费信息 -->
+    <select id="getByUserId" resultType="com.Lnn.entity.PaymentVO">
+        select username,name activity_name,cost
+        from user left join payment on user.id = payment.user_id
+                  left join activity on payment.activity_id = activity.id
+        where user_id = #{userId};
+    </select>
+
+    <!-- 根据活动id 查询缴费信息 -->
+    <select id="getByActivityId" resultType="com.Lnn.entity.PaymentVO">
+        select username,name activity_name,cost
+        from user left join payment on user.id = payment.user_id
+                  left join activity on payment.activity_id = activity.id
+        where activity_id = #{activityId};
+    </select>
+
+    <select id="getSumByActivityId" resultType="java.lang.Double">
+        select sum(cost)
+        from payment
+        where activity_id = #{activityId};
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true">
+        insert into payment (user_id, activity_id, cost) values (#{userId},#{activityId},#{cost});
+    </insert>
+
 
 </mapper>

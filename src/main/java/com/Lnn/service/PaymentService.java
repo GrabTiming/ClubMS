@@ -1,6 +1,8 @@
 package com.Lnn.service;
 
-import com.Lnn.entity.Payment;
+import com.Lnn.entity.PaymentVO;
+
+import java.util.List;
 
 
 /**
@@ -11,6 +13,15 @@ import com.Lnn.entity.Payment;
  */
 public interface PaymentService {
 
+    //根据用户id查询 缴纳的费用
+    List<PaymentVO> getByUserId(Integer userId);
 
+    //根据活动查询 缴费的数据
+    List<PaymentVO> getByActivityId(Integer activityId);
+
+    //查看活动 缴纳的总金额
+    Double getSumByActivityId(Integer activityId);
+
+    boolean addPayment(Integer userId,Integer activityId,Double cost);
 
 }

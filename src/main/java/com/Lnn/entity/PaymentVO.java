@@ -15,17 +15,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Payment  {
-   
-    private Integer id;
+public class PaymentVO {
+
     /**
      * 用户id
      */
-    private Integer userId;
+    private String username;
     /**
      * 活动id
      */
-    private Integer activityId;
+    private String activityName;
     /**
      * 缴费金额
      */

@@ -2,6 +2,8 @@ package com.Lnn.mapper;
 
 import com.Lnn.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
 
 import java.util.List;
 
@@ -20,4 +22,5 @@ public interface UserMapper {
 
 
     User getByUserName(String username);
+
 }
