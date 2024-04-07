@@ -3,4 +3,39 @@
 <mapper namespace="com.Lnn.mapper.ActivityMapper">
 
 
+    <!--查询所有活动-->
+    <select id="getAllActivity" resultType="com.Lnn.vo.responseVO.ActivityVO">
+            select name,description,start_time,end_time
+            from activity;
+    </select>
+
+    <!--查询活动名是否存在-->
+    <select id="activityNameExits" resultType="java.lang.Integer">
+        select count(*)
+        from activity
+        where name = #{name}
+        limit 1;
+    </select>
+
+
+    <insert id="add">
+        insert into activity (club_id, name, description, start_time, end_time)
+        values (#{clubId},#{name},#{description},#{startTime},#{endTime});
+    </insert>
+
+    <!--更新新活动-->
+    <update id="update">
+        update activity
+        set name = #{name},start_time = #{startTime},end_time = #{endTime}
+        where name = #{name};
+    </update>
+
+
+    <select id="getByActivityName" resultType="com.Lnn.vo.responseVO.ActivityVO">
+        select club_id, name, description, start_time, end_time
+        from activity
+        where name = #{activityName};
+
+    </select>
+
 </mapper>

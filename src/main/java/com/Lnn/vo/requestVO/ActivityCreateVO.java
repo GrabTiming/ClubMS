@@ -1,4 +1,4 @@
-package com.Lnn.vo.responseVO;
+package com.Lnn.vo.requestVO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,12 +9,11 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-/*
-  查询活动时，表现出来的数据
- */
-public class ActivityVO {
+public class ActivityCreateVO {
 
     private String name;
+
+    private Integer clubId;
     /**
      * 活动描述
      */
@@ -27,6 +26,5 @@ public class ActivityVO {
      * 结束时间
      */
     private Date endTime;
-
 
 }

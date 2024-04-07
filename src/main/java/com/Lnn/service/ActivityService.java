@@ -1,5 +1,7 @@
 package com.Lnn.service;
 
+import com.Lnn.entity.RestBean;
+import com.Lnn.vo.requestVO.ActivityCreateVO;
 import com.Lnn.vo.responseVO.ActivityVO;
 import com.Lnn.vo.responseVO.UserVO;
 
@@ -15,17 +17,15 @@ public interface ActivityService {
 
 
     //1. 查询所有进行中的活动信息;
+    List<ActivityVO> getAllActivity();
 
-    //2. 查询所有社团活动信息;
 
-    // 查询指定社团的活动信息;
 
-    //3. 查询用户所在社团的成员信息(用户可能参加不止一个社团，要分开);
-
-    //4. 查询用户参加的活动
-
-    //5. 活动管理：（活动报名审核，活动签到审核，发动活动预告）
+    //2. 新增活动
+    RestBean<String> addActivity(ActivityCreateVO vo);
 
     //6. 更新活动信息
+    RestBean<String> updateActivity(ActivityVO activityVO);
+
 
 }
