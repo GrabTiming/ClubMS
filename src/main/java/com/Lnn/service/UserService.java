@@ -1,7 +1,6 @@
 package com.Lnn.service;
 
-import com.Lnn.entity.RestBean;
-import com.Lnn.entity.User;
+import com.Lnn.result.RestBean;
 
 /**
  * (User)表服务接口
