@@ -1,7 +1,6 @@
-package com.Lnn.entity;
+package com.Lnn.result;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data

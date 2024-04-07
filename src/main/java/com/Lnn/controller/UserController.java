@@ -1,6 +1,6 @@
 package com.Lnn.controller;
 
-import com.Lnn.entity.RestBean;
+import com.Lnn.result.RestBean;
 import com.Lnn.entity.User;
 import com.Lnn.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;

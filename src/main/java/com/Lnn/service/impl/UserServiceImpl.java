@@ -1,7 +1,7 @@
 package com.Lnn.service.impl;
 
 
-import com.Lnn.entity.RestBean;
+import com.Lnn.result.RestBean;
 import com.Lnn.entity.User;
 import com.Lnn.mapper.UserMapper;
 import com.Lnn.service.UserService;
