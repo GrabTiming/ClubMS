@@ -1,6 +1,10 @@
 server:
   port: 8080
-
+  servlet:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/clubms?characterEncoding=utf-8&serverTimezone=UTC
