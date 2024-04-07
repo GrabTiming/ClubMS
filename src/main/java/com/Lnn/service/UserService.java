@@ -15,7 +15,10 @@ public interface UserService {
     //注册
     RestBean<String> register(String username, String password);
 
+    //登录
     RestBean<String> login(String username,String password);
 
+
+    //修改密码
 
 }

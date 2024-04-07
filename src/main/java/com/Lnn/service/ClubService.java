@@ -12,5 +12,10 @@ import com.Lnn.entity.Club;
 public interface ClubService {
 
 
+    //新增社团
+
+    //删除社团
+
+    //查询社团成员信息
 
 }

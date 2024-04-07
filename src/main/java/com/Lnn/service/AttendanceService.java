@@ -10,6 +10,11 @@ import com.Lnn.entity.Attendance;
  */
 public interface AttendanceService {
 
+    //查询活动签到情况
+
+    //查询用户签到情况
+
+    //更新签到状态
 
 
 }
