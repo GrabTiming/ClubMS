@@ -5,12 +5,11 @@ import com.Lnn.mapper.UserMapper;
 import com.Lnn.result.RestBean;
 import com.Lnn.service.AuthorityService;
 import com.Lnn.service.UserService;
+import com.Lnn.vo.requestVO.UpdateAuthorityVO;
+import com.Lnn.vo.requestVO.UpdateRoleVO;
 import com.Lnn.vo.responseVO.ClubAuthorityVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +31,17 @@ public class AuthorityController {
         return RestBean.success(authorityService.getClubAuthorityByUserId(id));
     }
 
+
+    @PostMapping("/club-authority/updateAuthority")
+    public RestBean updateAuthority(@RequestBody UpdateAuthorityVO vo)
+    {
+        return authorityService.updateAuthority(vo);
+    }
+
+    @PostMapping("/club-authority/updateRole")
+    public RestBean updateRole(@RequestBody UpdateRoleVO vo)
+    {
+        return authorityService.updateRole(vo);
+    }
 
 }

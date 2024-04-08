@@ -3,7 +3,6 @@
 <mapper namespace="com.Lnn.mapper.UserActivityMapper">
 
 
-
     <select id="getActivitiesByUserId" resultType="com.Lnn.vo.responseVO.ActivityVO">
                 select a.name ,a.description, a.start_time,a.end_time,ua.state
                 from `user-activity` ua left join activity a on ua.activity_id =a.id
