@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.Lnn.mapper.UserClubMapper">
 
+    <!--新增申请社团信息-->
+    <insert id="insert">
+        insert into `user-club` (user_id, club_id, authority, role, state)
+        values (#{userId},#{clubId},#{authority},#{role},#{state})
+    </insert>
 
 
     <!--查询与用户有关的社团的权限-->

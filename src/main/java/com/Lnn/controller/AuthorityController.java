@@ -27,7 +27,6 @@ public class AuthorityController {
     @GetMapping("/club-authority/{id}")
     public RestBean<List<ClubAuthorityVO>> getClubAuthority(@PathVariable("id") Integer id)
     {
-
         return RestBean.success(authorityService.getClubAuthorityByUserId(id));
     }
 

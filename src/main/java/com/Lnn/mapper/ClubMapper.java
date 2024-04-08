@@ -1,6 +1,7 @@
 package com.Lnn.mapper;
 
 import com.Lnn.DTO.ClubPageQueryDTO;
+import com.Lnn.DTO.UserClubQueryDTO;
 import com.Lnn.entity.Club;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Delete;
@@ -43,5 +44,7 @@ public interface ClubMapper {
     void update(Club club);
 
 
+    Page<Club> getAllClubAbsent(UserClubQueryDTO userClubQueryDTO);
 
+    Page<Club> getAllClubIncluded(UserClubQueryDTO userClubQueryDTO);
 }
