@@ -10,5 +10,16 @@ public class Constant {
     public static final String LOGIN_SUCCESS= "登录成功";
 
 
+    //活动报名 状态 默认未审核
+    public static final Integer ACTIVITY_DEFAULT_STATUS = 0;
+
+    //活动报名不通过 状态字
+    public static final Integer ACTIVITY_NOT_ACCESS_STATUS = 1;
+
+    //活动报名成功 状态字
+    public static final Integer ACTIVITY_ACCESS_STATUS = 2;
+
+
+
 
 }

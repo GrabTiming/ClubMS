@@ -14,6 +14,7 @@ public interface UserMapper {
     //获取所有用户
     List<User>  getAllUser();
 
+    Integer getIdByUsername(String username);
 
     Integer findUserName(String username);
 
@@ -23,4 +24,5 @@ public interface UserMapper {
 
     User getByUserName(String username);
 
+    User getById(Integer userId);
 }

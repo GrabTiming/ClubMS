@@ -1,7 +1,12 @@
 package com.Lnn;
 
 import com.Lnn.mapper.ActivityMapper;
+import com.Lnn.mapper.UserActivityMapper;
+import com.Lnn.service.ActivityService;
+import com.Lnn.service.UserActivityService;
+import com.Lnn.util.Constant;
 import com.Lnn.vo.requestVO.ActivityCreateVO;
+import com.Lnn.vo.requestVO.ActivityRegisterVO;
 import com.Lnn.vo.responseVO.ActivityVO;
 import lombok.Data;
 import org.junit.jupiter.api.Test;
@@ -18,6 +23,8 @@ public class ActivityTest {
     @Autowired
     private ActivityMapper activityMapper;
 
+    @Autowired
+    private ActivityService activityService;
 
     //插入活动测试
     @Test
@@ -46,6 +53,15 @@ public class ActivityTest {
         activity.setEndTime(end_time);
 
         activityMapper.update(activity);
-
     }
+
+    //活动报名
+    @Test
+    public void ActivityRegister()
+    {
+        ActivityRegisterVO vo = new ActivityRegisterVO("Lnn","全国第二十届数学竞赛",Constant.ACTIVITY_DEFAULT_STATUS);
+        activityService.addUserRegister(vo);
+    }
+
+
 }

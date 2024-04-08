@@ -16,17 +16,16 @@ public interface ActivityMapper {
     //查询活动信息
     List<ActivityVO> getAllActivity();
 
-
     ActivityVO getByActivityName(String activityName);
 
     //增加活动
     boolean add(ActivityCreateVO vo);
 
-
     //修改活动信息
     boolean update(ActivityVO activityVO);
 
-
     Integer activityNameExits(String name);
+
+    Integer getIdByActivityName(String name);
 
 }

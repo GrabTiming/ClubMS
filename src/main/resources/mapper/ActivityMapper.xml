@@ -38,4 +38,10 @@
 
     </select>
 
+    <!--根据活动名查id-->
+    <select id="getIdByActivityName" resultType="java.lang.Integer">
+        select id from activity
+        where name = #{activityName};
+    </select>
+
 </mapper>

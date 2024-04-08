@@ -1,11 +1,15 @@
 package com.Lnn.service.impl;
 
 import com.Lnn.entity.Activity;
-import com.Lnn.entity.RestBean;
+import com.Lnn.entity.User;
 import com.Lnn.mapper.ActivityMapper;
+import com.Lnn.mapper.UserActivityMapper;
+import com.Lnn.mapper.UserMapper;
+import com.Lnn.result.RestBean;
 import com.Lnn.service.ActivityService;
 import com.Lnn.util.Constant;
 import com.Lnn.vo.requestVO.ActivityCreateVO;
+import com.Lnn.vo.requestVO.ActivityRegisterVO;
 import com.Lnn.vo.responseVO.ActivityVO;
 import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +29,12 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Autowired
     private ActivityMapper activityMapper;
+
+    @Autowired
+    private UserActivityMapper userActivityMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     //1. 查询所有进行中的活动信息;
     @Override
@@ -61,4 +71,33 @@ public class ActivityServiceImpl implements ActivityService {
         else return RestBean.failure(500,Constant.SYSTEM_ERROR);
 
     }
+
+    @Override
+    public RestBean<String> addUserRegister(ActivityRegisterVO vo) {
+        Integer userId = userMapper.getIdByUsername(vo.getUsername());
+        Integer activityId = activityMapper.getIdByActivityName(vo.getActivityName());
+        if(userActivityMapper.insert(userId,activityId,Constant.ACTIVITY_DEFAULT_STATUS)>0)
+        {
+            return RestBean.success();
+        }
+        return RestBean.failure(400,Constant.SYSTEM_ERROR);
+
+    }
+
+    //活动报名 对用户报名活动 设置状态
+    @Override
+    public RestBean<String> updateUserRegister(ActivityRegisterVO vo) {
+        Integer userId = userMapper.getIdByUsername(vo.getUsername());
+        Integer activityId = activityMapper.getIdByActivityName(vo.getActivityName());
+
+        if(userActivityMapper.update(userId,activityId,vo.getState())>0)
+        {
+            return RestBean.success();
+        }
+        else return RestBean.failure(400,Constant.SYSTEM_ERROR);
+
+    }
+
+
+
 }

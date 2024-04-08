@@ -6,6 +6,8 @@ import com.Lnn.entity.User;
 import com.Lnn.mapper.UserMapper;
 import com.Lnn.service.UserService;
 import com.Lnn.util.Constant;
+import com.Lnn.vo.responseVO.LoginUserVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,17 +26,18 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public RestBean<String> register(String username, String password) {
+    public RestBean<User> register(String username, String password) {
 
         //判断是否重名
         if(userMapper.findUserName(username)>0)
         {
-            return RestBean.failure(405, Constant.REGISTER_USERNAME_REPEAT);
+            return RestBean.failure(400, Constant.REGISTER_USERNAME_REPEAT);
         }
 
         if(userMapper.addUser(username,password))
         {
-            return RestBean.success(Constant.REGISTER_SUCCESS);
+            User user = userMapper.getByUserName(username);
+            return RestBean.success(user,Constant.REGISTER_SUCCESS);
         }
         else //到这说明插入失败，数据库问题
         {
@@ -44,15 +47,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public RestBean<String> login(String username, String password) {
+    public RestBean<LoginUserVO> login(String username, String password) {
 
+        System.out.println(username+" "+password);
+        if(username==null) return RestBean.failure(400,"用户名为空");
         User user = userMapper.getByUserName(username);
-
+        if(user==null) return RestBean.failure(400,"用户名不存在");
         if(user.getPassword().equals(password))
         {
-            return RestBean.success();
+            LoginUserVO vo = new LoginUserVO();
+            BeanUtils.copyProperties(user,vo);
+            return RestBean.success(vo,Constant.LOGIN_SUCCESS);
         }
-        else return RestBean.failure(403,Constant.LOGIN_FAILURE);
+        else return RestBean.failure(400,Constant.LOGIN_FAILURE);
 
+    }
+
+    @Override
+    public User getById(Integer userId) {
+        return userMapper.getById(userId);
     }
 }

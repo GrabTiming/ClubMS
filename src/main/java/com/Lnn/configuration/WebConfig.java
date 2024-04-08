@@ -5,18 +5,21 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.serializer.ToStringSerializer;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 
-import org.springframework.http.converter.json.JsonbHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -42,6 +45,7 @@ public class WebConfig implements WebMvcConfigurer {
 
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
+        fastJsonConfig.setCharset(StandardCharsets.UTF_8);
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
         fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -53,11 +57,13 @@ public class WebConfig implements WebMvcConfigurer {
 
     }
 
+
     @Override
     //配置消息转换器
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         //增加我们的消息转换器
         converters.add(fastJsonHttpMessageConverters());
+
     }
 
     //--------------------------------------------------------------------------------------

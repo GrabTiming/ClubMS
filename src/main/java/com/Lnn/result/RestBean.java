@@ -20,13 +20,17 @@ public class RestBean<T>  {
 
     //请求成功，返回数据
     public static <T> RestBean<T> success(T data){
-        return new RestBean<>(200, data, "请求成功");
+        return new RestBean<>(200, data, "操作成功");
     }
 
     //请求成功，不返回数据
     public static <T> RestBean<T> success(){
         return success(null);
     }
+    public static <T> RestBean<T> success(T data,String message){
+        return new RestBean<>(200,data,message);
+    }
+
 
     //禁止
     public static <T> RestBean<T> forbidden(String message){

@@ -20,7 +20,6 @@ public class ClubController {
     @Autowired
     private ClubService clubService;
 
-
     /**
      * 分页查询所有的社团
      * @return
@@ -29,7 +28,7 @@ public class ClubController {
     public RestBean<PageResult> getAllClub(ClubPageQueryDTO clubPageQueryDTO){
         PageResult pageResult = clubService.pageQuery(clubPageQueryDTO);
         System.out.println(pageResult);
-        return RestBean.success(pageResult);
+        return RestBean.success(pageResult,"社团查询成功");
     }
 
 
@@ -42,7 +41,7 @@ public class ClubController {
     public RestBean addNewClub(@RequestBody Club club){
         log.info("新增社团:{}",club);
         clubService.addNewClub(club);
-        return RestBean.success(club);
+        return RestBean.success(club,"已添加社团："+club.getName());
     }
 
 
@@ -55,7 +54,7 @@ public class ClubController {
     public RestBean delete(@PathVariable("id") Integer id){
         log.info("删除社团：{}",id);
         clubService.delete(id);
-        return RestBean.success();
+        return RestBean.success(null,"删除成功");
     }
 
     /**
@@ -67,7 +66,7 @@ public class ClubController {
     public RestBean update(@RequestBody Club club){
         log.info("修改社团信息：{}",club);
         clubService.update(club);
-        return RestBean.success();
+        return RestBean.success(null,"修改成功");
     }
 
 

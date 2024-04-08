@@ -19,7 +19,7 @@ public interface ClubMapper {
      * 分页查询社团
      * @return
      */
-    @Select("select * from club")
+    @Select("select * from club ")
     Page<Club> pageQuery(ClubPageQueryDTO clubPageQueryDTO);
 
 

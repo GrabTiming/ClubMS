@@ -27,4 +27,11 @@
         where activity_id = #{activityId}
     </delete>
 
+    <!--更改报名状态 0未审核，1不通过，2通过-->
+    <update id="update">
+        update `user-activity`
+        set state = #{state}
+        where user_id = #{userId} and activity_id = #{activityId}
+    </update>
+
 </mapper>

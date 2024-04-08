@@ -1,12 +1,11 @@
-package com.Lnn.mapper;
+package com.Lnn.service;
 
 import com.Lnn.vo.responseVO.ClubAuthorityVO;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
-public interface UserClubMapper {
+
+public interface AuthorityService {
 
 
     List<ClubAuthorityVO> getClubAuthorityByUserId(Integer userId);

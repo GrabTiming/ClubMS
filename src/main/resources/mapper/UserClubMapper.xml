@@ -2,4 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.Lnn.mapper.UserClubMapper">
 
+
+    <!--查询与用户有关的社团的权限-->
+    <select id="getClubAuthorityByUserId" resultType="com.Lnn.vo.responseVO.ClubAuthorityVO">
+        select c.name clubName, authority,uc.role
+        from user u left join `user-club` uc on u.id = uc.id
+                    left join club c on uc.club_id = c.id
+        where user_id  = #{userId} and state = 2;
+    </select>
 </mapper>

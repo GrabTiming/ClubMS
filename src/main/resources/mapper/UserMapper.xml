@@ -27,4 +27,14 @@
         (#{username},#{password},0);
     </insert>
 
+
+    <!--根据用户名查id-->
+    <select id="getIdByUsername" resultType="java.lang.Integer">
+        select id from user where  username = #{username};
+    </select>
+
+    <select id="getById" resultType="com.Lnn.entity.User">
+        select * from user where id = #{userId};
+    </select>
+
 </mapper>
