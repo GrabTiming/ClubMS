@@ -29,7 +29,7 @@ public class UserClub  {
     /**
      * 权限(二进制表示，0位查看成员信息，1位审核成员申请，2位活动全权管理)
      */
-    private String authority;
+    private Integer authority;
     /**
      * 0社员，1社长
      */
@@ -37,7 +37,7 @@ public class UserClub  {
     /**
      * (0未审核，1未通过，2通过)
      */
-    private String state;
+    private Integer state;
 
 
 }

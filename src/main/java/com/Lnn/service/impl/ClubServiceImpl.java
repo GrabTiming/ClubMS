@@ -3,11 +3,16 @@ package com.Lnn.service.impl;
 import com.Lnn.DTO.ClubPageQueryDTO;
 import com.Lnn.DTO.UserClubQueryDTO;
 import com.Lnn.entity.Club;
+import com.Lnn.entity.UserClub;
 import com.Lnn.mapper.ClubMapper;
+import com.Lnn.mapper.UserClubMapper;
 import com.Lnn.result.PageResult;
 import com.Lnn.service.ClubService;
+import com.Lnn.util.Constant;
+import com.Lnn.vo.requestVO.ClubCreateVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +30,9 @@ public class ClubServiceImpl implements ClubService {
     @Autowired
     private ClubMapper clubMapper;
 
+    @Autowired
+    private UserClubMapper userClubMapper;
+
     /**
      * 分页查询所有的社团
      * @param clubPageQueryDTO
@@ -40,13 +48,24 @@ public class ClubServiceImpl implements ClubService {
 
     /**
      * 增加表
-     * @param club
      */
     @Override
     //@Transactional//因为涉及多个表，所以加上这个注解，要么全部成功要么全部失败
-    public void addNewClub(Club club) {
+    public Club addNewClub(ClubCreateVO clubCreateVO) {
 
+        Club club = new Club();
+        BeanUtils.copyProperties(clubCreateVO,club);
         clubMapper.insert(club);
+        System.out.println(club);
+        //还要将创建人 修改为 社团的社长
+        UserClub userClub = new UserClub();
+        userClub.setClubId(club.getId());
+        userClub.setUserId(clubCreateVO.getUserId());
+        userClub.setAuthority(Constant.CLUB_LEADER_AUTHORITY);
+        userClub.setRole(Constant.CLUB_LEADER_ROLE);
+        userClub.setState(Constant.ACCESS_STATUS);
+        userClubMapper.insert(userClub);
+        return club;
     }
 
     /**
@@ -98,7 +117,7 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
-    public int getClubName(Club club) {
-        return clubMapper.getClubName(club.getName());
+    public int getClubName(String clubName) {
+        return clubMapper.getClubName(clubName);
     }
 }

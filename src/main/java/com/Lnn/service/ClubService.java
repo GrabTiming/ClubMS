@@ -4,6 +4,7 @@ import com.Lnn.DTO.ClubPageQueryDTO;
 import com.Lnn.DTO.UserClubQueryDTO;
 import com.Lnn.entity.Club;
 import com.Lnn.result.PageResult;
+import com.Lnn.vo.requestVO.ClubCreateVO;
 
 
 /**
@@ -22,9 +23,9 @@ public interface ClubService {
 
     /**
      * 新增社团
-     * @param club
+     * @param clubCreateVO
      */
-    void addNewClub(Club club);
+    Club addNewClub(ClubCreateVO clubCreateVO);
 
     /**
      * 删除社团
@@ -42,5 +43,5 @@ public interface ClubService {
     PageResult getAllClubIncluded(UserClubQueryDTO clubPageQueryDTO);
 
     //查询社团名是否存在
-    int getClubName(Club club);
+    int getClubName(String clubName);
 }

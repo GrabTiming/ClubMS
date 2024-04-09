@@ -3,12 +3,18 @@ package com.Lnn.controller;
 import com.Lnn.DTO.ClubPageQueryDTO;
 import com.Lnn.DTO.UserClubQueryDTO;
 import com.Lnn.entity.Club;
+import com.Lnn.entity.UserClub;
 import com.Lnn.mapper.ClubMapper;
+import com.Lnn.mapper.UserClubMapper;
 import com.Lnn.result.PageResult;
 import com.Lnn.result.RestBean;
 import com.Lnn.service.ClubService;
+import com.Lnn.util.Constant;
+import com.Lnn.vo.requestVO.ClubCreateVO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.bcel.Const;
 import org.apiguardian.api.API;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +26,9 @@ public class ClubController {
 
     @Autowired
     private ClubService clubService;
+
+    @Autowired
+    private UserClubMapper userClubMapper;
 
     /**
      * 分页查询所有的社团
@@ -63,19 +72,18 @@ public class ClubController {
 
     /**
      * 新增社团
-     * @param club
+     * @param clubCreateVO 创建用户的VO数据
      * @return
      */
     @PostMapping("/add")
-    public RestBean addNewClub(@RequestBody Club club){
+    public RestBean addNewClub(@RequestBody ClubCreateVO clubCreateVO){
 
-        if(clubService.getClubName(club)>0)
+        if(clubService.getClubName(clubCreateVO.getName())>0)
         {
             return RestBean.failure(400,"社团名重复");
         }
-        log.info("新增社团:{}",club);
+        Club club = clubService.addNewClub(clubCreateVO);
 
-        clubService.addNewClub(club);
         return RestBean.success(club,"已添加社团："+club.getName());
     }
 

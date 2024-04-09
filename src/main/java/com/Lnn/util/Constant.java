@@ -10,14 +10,24 @@ public class Constant {
     public static final String LOGIN_SUCCESS= "登录成功";
 
 
+    public static final Integer CLUB_LEADER_ROLE = 1;
+
+    /**
+     * 社长权限
+     */
+    public static final Integer CLUB_LEADER_AUTHORITY = 15;
+    public static final Integer CLUB_MEMBER_ROLE = 0;
+
+
+
     //活动报名 状态 默认未审核
-    public static final Integer ACTIVITY_DEFAULT_STATUS = 0;
+    public static final Integer DEFAULT_STATUS = 0;
 
     //活动报名不通过 状态字
-    public static final Integer ACTIVITY_NOT_ACCESS_STATUS = 1;
+    public static final Integer NOT_ACCESS_STATUS = 1;
 
     //活动报名成功 状态字
-    public static final Integer ACTIVITY_ACCESS_STATUS = 2;
+    public static final Integer ACCESS_STATUS = 2;
 
 
 

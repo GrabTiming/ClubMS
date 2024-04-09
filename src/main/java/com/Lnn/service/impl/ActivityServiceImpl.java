@@ -79,7 +79,7 @@ public class ActivityServiceImpl implements ActivityService {
     public RestBean<String> addUserRegister(ActivityRegisterVO vo) {
         Integer userId = userMapper.getIdByUsername(vo.getUsername());
         Integer activityId = activityMapper.getIdByActivityName(vo.getActivityName());
-        if(userActivityMapper.insert(userId,activityId,Constant.ACTIVITY_DEFAULT_STATUS)>0)
+        if(userActivityMapper.insert(userId,activityId,Constant.DEFAULT_STATUS)>0)
         {
             return RestBean.success();
         }

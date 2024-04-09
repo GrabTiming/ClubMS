@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.Lnn.mapper.ClubMapper">
 
-    <insert id="insert">
-        insert into club(id, name, description, email, place)
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into club( name, description, email, place)
         value
-        (#{id}, #{name}, #{description}, #{email}, #{place})
+         (#{name}, #{description}, #{email}, #{place})
     </insert>
 
 
     <!--查询 未申请过的社团-->
-    <select id="getAllClubAbsent" resultType="com.Lnn.entity.Club">
+    <select id="getAllClubAbsent" resultType="com.Lnn.entity.Club" >
         select *
         from club
         where club.id not in (select club_id

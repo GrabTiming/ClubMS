@@ -6,7 +6,6 @@ import com.Lnn.entity.Club;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 
 /**
@@ -23,9 +22,11 @@ public interface ClubMapper {
     Page<Club> pageQuery(ClubPageQueryDTO clubPageQueryDTO);
     /**
      * 增加社团
+     *
      * @param club
+     * @return
      */
-    void insert(Club club);
+    int insert(Club club);
 
     /**
      *根据社团id删除社团
