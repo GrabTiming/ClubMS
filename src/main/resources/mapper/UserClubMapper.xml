@@ -34,7 +34,7 @@
 
 
     <select id="getUserAuthorityByClubId" resultType="com.Lnn.vo.responseVO.ClubAuthorityVO">
-        select  u.id,u.username, c.id clubId, c.name clubName, authority,uc.role
+        select  u.id userId,u.username, c.id clubId, c.name clubName, authority,uc.role
         from user u left join `user-club` uc on u.id = uc.user_id
                     left join club c on uc.club_id = c.id
         where club_id = #{clubId} and state = 2
