@@ -10,11 +10,15 @@ import java.util.List;
 
 public interface AuthorityService {
 
-
+    //查看与之有关的社团的 权限
     List<ClubAuthorityVO> getClubAuthorityByUserId(Integer userId);
 
+
+    //更新权限
     RestBean updateAuthority(UpdateAuthorityVO updateAuthorityVO);
 
+    //授权
     RestBean updateRole(UpdateRoleVO updateRoleVO);
 
+    List<ClubAuthorityVO> getUserAuthorityByClubId(Integer id);
 }

@@ -33,7 +33,11 @@ public class ClubController {
     }
 
 
-
+    /**
+     * 查询 未申请过的社团
+     * @param userClubQueryDTO
+     * @return
+     */
     @PostMapping("/search/unIncluded")
     public RestBean<PageResult> getAllClubAbsent(@RequestBody UserClubQueryDTO userClubQueryDTO)
     {
@@ -43,6 +47,11 @@ public class ClubController {
     }
 
 
+    /**
+     * 查询 申请过的社团
+     * @param userClubQueryDTO
+     * @return
+     */
     @PostMapping("/search/included")
     public RestBean<PageResult> getAllClubIncluded(@RequestBody UserClubQueryDTO userClubQueryDTO)
     {
@@ -51,6 +60,7 @@ public class ClubController {
         return RestBean.success(pageResult,"社团查询成功");
     }
 
+
     /**
      * 新增社团
      * @param club
@@ -58,7 +68,13 @@ public class ClubController {
      */
     @PostMapping("/add")
     public RestBean addNewClub(@RequestBody Club club){
+
+        if(clubService.getClubName(club)>0)
+        {
+            return RestBean.failure(400,"社团名重复");
+        }
         log.info("新增社团:{}",club);
+
         clubService.addNewClub(club);
         return RestBean.success(club,"已添加社团："+club.getName());
     }

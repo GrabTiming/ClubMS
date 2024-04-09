@@ -9,7 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ClubAuthorityVO {
 
+    private Integer userId;
+
     private String username;
+
+    private Integer clubId;
     //社团名称
     private String clubName;
     //在这个社团的权限

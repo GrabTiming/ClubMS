@@ -34,8 +34,7 @@ public class ClubServiceImpl implements ClubService {
     public PageResult pageQuery(ClubPageQueryDTO clubPageQueryDTO) {
         PageHelper.startPage(clubPageQueryDTO.getPage(),clubPageQueryDTO.getPageSize());
         Page<Club> page =clubMapper.pageQuery(clubPageQueryDTO);
-        Long total = (long) page.getResult().size();
-        return new PageResult(total,page.getResult());
+        return new PageResult(page.getTotal(),page.getResult());
     }
 
 
@@ -46,6 +45,7 @@ public class ClubServiceImpl implements ClubService {
     @Override
     //@Transactional//因为涉及多个表，所以加上这个注解，要么全部成功要么全部失败
     public void addNewClub(Club club) {
+
         clubMapper.insert(club);
     }
 
@@ -95,5 +95,10 @@ public class ClubServiceImpl implements ClubService {
         PageHelper.startPage(userClubQueryDTO.getPage(),userClubQueryDTO.getPageSize());
         Page<Club> page =clubMapper.getAllClubIncluded(userClubQueryDTO);
         return new PageResult(page.getTotal(),page.getResult());
+    }
+
+    @Override
+    public int getClubName(Club club) {
+        return clubMapper.getClubName(club.getName());
     }
 }

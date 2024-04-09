@@ -40,4 +40,7 @@ public interface ClubService {
 
     PageResult getAllClubAbsent(UserClubQueryDTO clubPageQueryDTO);
     PageResult getAllClubIncluded(UserClubQueryDTO clubPageQueryDTO);
+
+    //查询社团名是否存在
+    int getClubName(Club club);
 }

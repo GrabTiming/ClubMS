@@ -19,12 +19,16 @@ public class ActivityController {
     @Autowired
     private ActivityService activityService;
 
+
+    //1. 查询所有进行中的活动信息;
     @GetMapping("/all")
     public RestBean<List<ActivityVO>> getAll()
     {
         return RestBean.success(activityService.getAllActivity());
     }
 
+
+    //2. 新增活动
     @PostMapping("/create")
     public RestBean<String> createActivity(@RequestBody ActivityCreateVO vo)
     {
@@ -48,5 +52,18 @@ public class ActivityController {
     {
         return activityService.updateUserRegister(vo);
     }
+
+    /**
+     * 更新活动信息
+     * @param activityVO
+     * @return
+     */
+    @PostMapping("updateActivity")
+    public RestBean updateActivity (@RequestBody ActivityVO activityVO){
+        activityService.updateActivity(activityVO);
+        return  RestBean.success();
+
+    }
+
 
 }

@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
+    //注册
     @Override
     public RestBean<User> register(String username, String password) {
 
@@ -46,6 +47,8 @@ public class UserServiceImpl implements UserService {
 
     }
 
+
+    //登录
     @Override
     public RestBean<LoginUserVO> login(String username, String password) {
 
@@ -63,6 +66,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    //修改密码
     @Override
     public User getById(Integer userId) {
         return userMapper.getById(userId);

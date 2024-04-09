@@ -21,7 +21,9 @@ public interface UserService {
 
 
     //修改密码
-
     User getById(Integer userId);
+
+
+    //修改信息
 
 }

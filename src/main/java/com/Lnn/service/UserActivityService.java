@@ -12,8 +12,10 @@ public interface UserActivityService {
     //根据活动id查询参加的用户
     List<UserVO> getUserByActivityId(int activityId);
 
+    //参加活动
     void insert(Integer userId,Integer activityId,Integer state);
 
+    //根据活动ID删除活动
     void deleteByActivityId(Integer activityId);
 
 }

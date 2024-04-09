@@ -11,10 +11,18 @@ import com.Lnn.entity.Attendance;
 public interface AttendanceService {
 
     //查询活动签到情况
+    Attendance inquireByActivity(int activityId);
+
 
     //查询用户签到情况
+    Attendance inquireByUser(int userId);
+
 
     //更新签到状态
+    Attendance update(String state,int userId);
+
+
+
 
 
 }

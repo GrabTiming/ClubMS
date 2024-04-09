@@ -9,17 +9,6 @@
     </insert>
 
 
-    <update id="update">
-        update club
-        <set>
-            <if test="name != null"> name = #{name}</if>
-            <if test="description != null"> description = #{description}</if>
-            <if test="email != null"> email = #{email}</if>
-            <if test="place != null"> place = #{place}</if>
-        </set>
-        where id = #{id}
-    </update>
-
     <!--查询 未申请过的社团-->
     <select id="getAllClubAbsent" resultType="com.Lnn.entity.Club">
         select *
@@ -34,10 +23,28 @@
         select *
         from club
         where club.id  in (select club_id
-                              from `user-club`
-                              where user_id = #{id})
+                           from `user-club`
+                           where user_id = #{id})
     </select>
 
+
+    <update id="update">
+        update club
+        <set>
+            <if test="name != null"> name = #{name}</if>
+            <if test="description != null"> description = #{description}</if>
+            <if test="email != null"> email = #{email}</if>
+            <if test="place != null"> place = #{place}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="getClubName" resultType="java.lang.Integer">
+        select count(*)
+        from  club
+        where club.name = #{clubName}
+        limit 1
+    </select>
 
     <select id="pageQuery" resultType="com.Lnn.entity.Club">
         select * from club

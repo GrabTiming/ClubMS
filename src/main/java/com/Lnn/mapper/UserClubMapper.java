@@ -20,4 +20,6 @@ public interface UserClubMapper {
     Integer updateAuthority(UpdateAuthorityVO updateAuthorityVO);
 
     Integer updateRole(UpdateRoleVO updateRoleVO);
+
+    List<ClubAuthorityVO> getUserAuthorityByClubId(Integer id);
 }

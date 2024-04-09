@@ -22,6 +22,7 @@ public interface PaymentService {
     //查看活动 缴纳的总金额
     Double getSumByActivityId(Integer activityId);
 
+    //缴费成功的成员
     boolean addPayment(Integer userId,Integer activityId,Double cost);
 
 }

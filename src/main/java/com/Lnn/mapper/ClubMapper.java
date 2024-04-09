@@ -20,10 +20,7 @@ public interface ClubMapper {
      * 分页查询社团
      * @return
      */
-
     Page<Club> pageQuery(ClubPageQueryDTO clubPageQueryDTO);
-
-
     /**
      * 增加社团
      * @param club
@@ -43,8 +40,10 @@ public interface ClubMapper {
      */
     void update(Club club);
 
-
     Page<Club> getAllClubAbsent(UserClubQueryDTO userClubQueryDTO);
 
     Page<Club> getAllClubIncluded(UserClubQueryDTO userClubQueryDTO);
+
+
+    int getClubName(String clubName);
 }
