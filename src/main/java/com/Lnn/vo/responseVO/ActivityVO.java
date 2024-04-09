@@ -28,5 +28,6 @@ public class ActivityVO {
      */
     private Date endTime;
 
+    private Integer state;
 
 }

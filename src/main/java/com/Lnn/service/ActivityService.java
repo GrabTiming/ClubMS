@@ -35,4 +35,5 @@ public interface ActivityService {
     RestBean<String> updateUserRegister(ActivityRegisterVO vo);
 
 
+    List<ActivityVO> getActivityByUserId(Integer userId);
 }

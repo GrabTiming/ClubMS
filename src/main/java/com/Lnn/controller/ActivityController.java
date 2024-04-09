@@ -28,6 +28,13 @@ public class ActivityController {
     }
 
 
+    //查询单个用户参加的所有活动
+    @GetMapping("/user/{id}")
+    public RestBean<List<ActivityVO>> getActivityByUserId(@PathVariable("id") Integer userId)
+    {
+        return RestBean.success(activityService.getActivityByUserId(userId));
+    }
+
     //2. 新增活动
     @PostMapping("/create")
     public RestBean<String> createActivity(@RequestBody ActivityCreateVO vo)

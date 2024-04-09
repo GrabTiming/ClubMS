@@ -101,6 +101,12 @@ public class ActivityServiceImpl implements ActivityService {
 
     }
 
+    @Override
+    public List<ActivityVO> getActivityByUserId(Integer userId) {
+
+        return userActivityMapper.getActivitiesByUserId(userId);
+
+    }
 
 
 }

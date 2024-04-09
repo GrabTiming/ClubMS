@@ -57,6 +57,7 @@ public class ClubServiceImpl implements ClubService {
         BeanUtils.copyProperties(clubCreateVO,club);
         clubMapper.insert(club);
         System.out.println(club);
+
         //还要将创建人 修改为 社团的社长
         UserClub userClub = new UserClub();
         userClub.setClubId(club.getId());
