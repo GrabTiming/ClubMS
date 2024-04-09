@@ -16,4 +16,6 @@ public interface UserClubMapper {
     Integer updateAuthority(UpdateAuthorityVO updateAuthorityVO);
 
     Integer updateRole(UpdateRoleVO updateRoleVO);
+
+    void add(int userId, int clubId, int i, int i1, int i2);
 }

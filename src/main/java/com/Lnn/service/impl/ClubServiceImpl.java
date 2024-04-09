@@ -6,6 +6,7 @@ import com.Lnn.entity.Club;
 import com.Lnn.mapper.ClubMapper;
 import com.Lnn.result.PageResult;
 import com.Lnn.service.ClubService;
+import com.Lnn.vo.requestVO.ClubVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +41,12 @@ public class ClubServiceImpl implements ClubService {
 
     /**
      * 增加表
-     * @param club
+     * @param clubVO
      */
     @Override
     //@Transactional//因为涉及多个表，所以加上这个注解，要么全部成功要么全部失败
-    public void addNewClub(Club club) {
-        clubMapper.insert(club);
+    public void addNewClub(ClubVO clubVO) {
+        clubMapper.insert(clubVO);
     }
 
     /**
@@ -94,5 +95,12 @@ public class ClubServiceImpl implements ClubService {
         PageHelper.startPage(userClubQueryDTO.getPage(),userClubQueryDTO.getPageSize());
         Page<Club> page =clubMapper.getAllClubIncluded(userClubQueryDTO);
         return new PageResult(page.getTotal(),page.getResult());
+    }
+
+    //获取新创建的社团id
+    @Override
+    public int getClubId(String name) {
+        int clubId = clubMapper.getClubId(name);
+        return clubId;
     }
 }

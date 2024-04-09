@@ -3,9 +3,9 @@
 <mapper namespace="com.Lnn.mapper.ClubMapper">
 
     <insert id="insert">
-        insert into club(id, name, description, email, place)
+        insert into club( name, description, email, place)
             value
-            (#{id}, #{name}, #{description}, #{email}, #{place})
+            (#{name}, #{description}, #{email}, #{place})
     </insert>
 
 

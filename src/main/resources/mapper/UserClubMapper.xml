@@ -9,6 +9,12 @@
     </insert>
 
 
+    <insert id="add">
+        insert into `user-club`(user_id, club_id, authority, role, state)
+        values (#{userId}, #{clubId}, #{i}, #{i1},#{i2})
+    </insert>
+
+
     <!--查询与用户有关的社团的权限-->
     <select id="getClubAuthorityByUserId" resultType="com.Lnn.vo.responseVO.ClubAuthorityVO">
         select c.name clubName, authority,uc.role

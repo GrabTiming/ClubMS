@@ -30,7 +30,6 @@ public class PaymentServiceImpl implements PaymentService {
         return paymentMapper.getByUserId(userId);
 
     }
-
     @Override
     public List<PaymentVO> getByActivityId(Integer activityId) {
         return paymentMapper.getByActivityId(activityId);

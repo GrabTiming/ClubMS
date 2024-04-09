@@ -49,4 +49,10 @@ public class AuthorityServiceImpl implements AuthorityService {
         }
         else return RestBean.failure(500, Constant.SYSTEM_ERROR);
     }
+
+    //插入新的申请且授权
+    @Override
+    public void add(int userId, int clubId, int i, int i1, int i2) {
+        userClubMapper.add(userId,clubId,7,1,2);
+    }
 }

@@ -20,4 +20,5 @@ public interface AuthorityService {
     //授权
     RestBean updateRole(UpdateRoleVO updateRoleVO);
 
+    void add(int userId, int clubId, int i, int i1, int i2);
 }

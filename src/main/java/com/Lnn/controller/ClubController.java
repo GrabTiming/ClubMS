@@ -6,7 +6,13 @@ import com.Lnn.entity.Club;
 import com.Lnn.mapper.ClubMapper;
 import com.Lnn.result.PageResult;
 import com.Lnn.result.RestBean;
+import com.Lnn.service.AuthorityService;
 import com.Lnn.service.ClubService;
+import com.Lnn.util.JwtClaimsConstant;
+import com.Lnn.util.JwtProperties;
+import com.Lnn.util.JwtUtil;
+import com.Lnn.vo.requestVO.ClubVO;
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.apiguardian.api.API;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +26,12 @@ public class ClubController {
 
     @Autowired
     private ClubService clubService;
+
+    @Autowired
+    private  JwtProperties jwtProperties;
+
+    @Autowired
+    private AuthorityService authorityService;
 
     /**
      * 分页查询所有的社团
@@ -63,14 +75,19 @@ public class ClubController {
 
     /**
      * 新增社团
-     * @param club
+     * @param clubVO
      * @return
      */
     @PostMapping("/add")
-    public RestBean addNewClub(@RequestBody Club club){
-        log.info("新增社团:{}",club);
-        clubService.addNewClub(club);
-        return RestBean.success(club,"已添加社团："+club.getName());
+    public RestBean addNewClub(@RequestBody ClubVO clubVO){
+        log.info("新增社团:{}",clubVO);
+        clubService.addNewClub(clubVO);
+        int clubId = clubService.getClubId(clubVO.getName());
+        String token = clubVO.getToken();
+        Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
+        Integer userId = (Integer) claims.get(JwtClaimsConstant.EMP_ID);
+        authorityService.add(userId,clubId,7,1,2);
+        return RestBean.success(clubVO,"已添加社团："+clubVO.getName());
     }
 
 

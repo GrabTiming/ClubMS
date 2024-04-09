@@ -3,6 +3,7 @@ package com.Lnn.mapper;
 import com.Lnn.DTO.ClubPageQueryDTO;
 import com.Lnn.DTO.UserClubQueryDTO;
 import com.Lnn.entity.Club;
+import com.Lnn.vo.requestVO.ClubVO;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,9 +26,9 @@ public interface ClubMapper {
 
     /**
      * 增加社团
-     * @param club
+     * @param clubVO
      */
-    void insert(Club club);
+    void insert(ClubVO clubVO);
 
     /**
      *根据社团id删除社团
@@ -46,6 +47,6 @@ public interface ClubMapper {
 
     Page<Club> getAllClubIncluded(UserClubQueryDTO userClubQueryDTO);
 
-
-
+    @Select("select id from club where name = #{name}")
+    int getClubId(String name);
 }

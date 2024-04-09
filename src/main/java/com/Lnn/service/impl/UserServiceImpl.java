@@ -6,6 +6,7 @@ import com.Lnn.entity.User;
 import com.Lnn.mapper.UserMapper;
 import com.Lnn.service.UserService;
 import com.Lnn.util.Constant;
+import com.Lnn.vo.requestVO.UserRegisterVO;
 import com.Lnn.vo.responseVO.LoginUserVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,20 +51,18 @@ public class UserServiceImpl implements UserService {
 
     //登录
     @Override
-    public RestBean<LoginUserVO> login(String username, String password) {
+    public User login(UserRegisterVO userRegisterVO) {
+        String userName = userRegisterVO.getUsername();
+        String passWord = userRegisterVO.getPassword();
 
-        System.out.println(username+" "+password);
-        if(username==null) return RestBean.failure(400,"用户名为空");
-        User user = userMapper.getByUserName(username);
-        if(user==null) return RestBean.failure(400,"用户名不存在");
-        if(user.getPassword().equals(password))
-        {
-            LoginUserVO vo = new LoginUserVO();
-            BeanUtils.copyProperties(user,vo);
-            return RestBean.success(vo,Constant.LOGIN_SUCCESS);
+        User user = userMapper.getByUserName(userName);
+
+        if(user == null || !passWord.equals(user.getPassword())){
+            //账号不存在或者密码错误
+            return user =null;
         }
-        else return RestBean.failure(400,Constant.LOGIN_FAILURE);
 
+        return user;
     }
 
     //修改密码
