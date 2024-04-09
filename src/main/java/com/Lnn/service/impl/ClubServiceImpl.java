@@ -33,8 +33,7 @@ public class ClubServiceImpl implements ClubService {
     public PageResult pageQuery(ClubPageQueryDTO clubPageQueryDTO) {
         PageHelper.startPage(clubPageQueryDTO.getPage(),clubPageQueryDTO.getPageSize());
         Page<Club> page =clubMapper.pageQuery(clubPageQueryDTO);
-        Long total = (long) page.getResult().size();
-        return new PageResult(total,page.getResult());
+        return new PageResult(page.getTotal(),page.getResult());
     }
 
 
