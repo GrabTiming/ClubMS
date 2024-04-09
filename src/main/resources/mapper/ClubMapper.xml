@@ -4,8 +4,8 @@
 
     <insert id="insert">
         insert into club(id, name, description, email, place)
-        value
-        (#{id}, #{name}, #{description}, #{email}, #{place})
+            value
+            (#{id}, #{name}, #{description}, #{email}, #{place})
     </insert>
 
 
@@ -19,5 +19,39 @@
         </set>
         where id = #{id}
     </update>
+
+    <!--查询 未申请过的社团-->
+    <select id="getAllClubAbsent" resultType="com.Lnn.entity.Club">
+        select *
+        from club
+        where club.id not in (select club_id
+                              from `user-club`
+                              where user_id = #{id})
+    </select>
+
+    <!--查询 申请过的社团-->
+    <select id="getAllClubIncluded" resultType="com.Lnn.entity.Club">
+        select *
+        from club
+        where club.id  in (select club_id
+                           from `user-club`
+                           where user_id = #{id})
+    </select>
+
+
+    <select id="pageQuery" resultType="com.Lnn.entity.Club">
+        select * from club
+        <where>
+            <if test="str != null">
+                and (
+                name like concat('%', #{str}, '%')
+                or description like concat('%', #{str}, '%')
+                or place like concat('%', #{str}, '%')
+                )
+            </if>
+        </where>
+        order by id
+    </select>
+
 
 </mapper>

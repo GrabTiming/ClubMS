@@ -19,6 +19,8 @@ public class AuthorityServiceImpl implements AuthorityService {
     @Autowired
     private UserClubMapper userClubMapper;
 
+
+    //查看与之有关的社团的 权限
     @Override
     public List<ClubAuthorityVO> getClubAuthorityByUserId(Integer userId) {
 
@@ -26,6 +28,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     }
 
+    //更新权限
     @Override
     public RestBean updateAuthority(UpdateAuthorityVO updateAuthorityVO) {
 
@@ -37,6 +40,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     }
 
+    //授权
     @Override
     public RestBean updateRole(UpdateRoleVO updateRoleVO) {
         if(userClubMapper.updateRole(updateRoleVO)>0)

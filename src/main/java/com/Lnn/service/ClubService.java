@@ -1,6 +1,7 @@
 package com.Lnn.service;
 
 import com.Lnn.DTO.ClubPageQueryDTO;
+import com.Lnn.DTO.UserClubQueryDTO;
 import com.Lnn.entity.Club;
 import com.Lnn.result.PageResult;
 
@@ -36,4 +37,7 @@ public interface ClubService {
       * @param club
      */
     void update(Club club);
+
+    PageResult getAllClubAbsent(UserClubQueryDTO clubPageQueryDTO);
+    PageResult getAllClubIncluded(UserClubQueryDTO clubPageQueryDTO);
 }

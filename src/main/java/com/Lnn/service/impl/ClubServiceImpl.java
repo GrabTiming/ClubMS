@@ -1,6 +1,7 @@
 package com.Lnn.service.impl;
 
 import com.Lnn.DTO.ClubPageQueryDTO;
+import com.Lnn.DTO.UserClubQueryDTO;
 import com.Lnn.entity.Club;
 import com.Lnn.mapper.ClubMapper;
 import com.Lnn.result.PageResult;
@@ -69,5 +70,29 @@ public class ClubServiceImpl implements ClubService {
     public void update(Club club) {
 
         clubMapper.update(club);
+    }
+
+    /**
+     * 返回用户未参加过的社团
+     * @return 未参加过的社团列表
+     */
+    @Override
+    public PageResult getAllClubAbsent(UserClubQueryDTO userClubQueryDTO) {
+
+        PageHelper.startPage(userClubQueryDTO.getPage(),userClubQueryDTO.getPageSize());
+        Page<Club> page =clubMapper.getAllClubAbsent(userClubQueryDTO);
+        return new PageResult(page.getTotal(),page.getResult());
+
+    }
+
+    /**
+     * 返回用户申请过的社团
+     * @return 申请过的社团列表
+     */
+    @Override
+    public PageResult getAllClubIncluded( UserClubQueryDTO userClubQueryDTO) {
+        PageHelper.startPage(userClubQueryDTO.getPage(),userClubQueryDTO.getPageSize());
+        Page<Club> page =clubMapper.getAllClubIncluded(userClubQueryDTO);
+        return new PageResult(page.getTotal(),page.getResult());
     }
 }

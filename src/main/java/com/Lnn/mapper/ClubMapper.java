@@ -1,6 +1,7 @@
 package com.Lnn.mapper;
 
 import com.Lnn.DTO.ClubPageQueryDTO;
+import com.Lnn.DTO.UserClubQueryDTO;
 import com.Lnn.entity.Club;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Delete;
@@ -19,7 +20,6 @@ public interface ClubMapper {
      * 分页查询社团
      * @return
      */
-    @Select("select * from club")
     Page<Club> pageQuery(ClubPageQueryDTO clubPageQueryDTO);
 
 
@@ -41,6 +41,10 @@ public interface ClubMapper {
      * @param club
      */
     void update(Club club);
+
+    Page<Club> getAllClubAbsent(UserClubQueryDTO userClubQueryDTO);
+
+    Page<Club> getAllClubIncluded(UserClubQueryDTO userClubQueryDTO);
 
 
 

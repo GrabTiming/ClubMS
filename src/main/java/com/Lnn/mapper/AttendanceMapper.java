@@ -1,6 +1,8 @@
 package com.Lnn.mapper;
 
+import com.Lnn.entity.Attendance;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 
 /**
@@ -9,12 +11,14 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface AttendanceMapper {
 
-    //查询签到信息
+    //查询活动签到情况
+    Attendance inquireByActivity(int activityId);
 
-    //增加签到信息
+    //查询用户签到情况
+    Attendance inquireByUser(int userId);
 
-    //删除签到信息
+    //更新签到状态
+    Attendance update(String state,int userId);
 
-    //修改活动信息
 
 }

@@ -42,6 +42,7 @@ public class ActivityServiceImpl implements ActivityService {
         return activityMapper.getAllActivity();
     }
 
+    //2. 新增活动
     @Override
     public RestBean<String> addActivity(ActivityCreateVO vo) {
 
@@ -58,6 +59,7 @@ public class ActivityServiceImpl implements ActivityService {
         else return RestBean.failure(500,Constant.SYSTEM_ERROR);
     }
 
+    //更新活动信息
     @Override
     public RestBean<String> updateActivity(ActivityVO activityVO) {
         if(activityMapper.activityNameExits(activityVO.getName())>0)
@@ -72,6 +74,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     }
 
+    //更新报名信息
     @Override
     public RestBean<String> addUserRegister(ActivityRegisterVO vo) {
         Integer userId = userMapper.getIdByUsername(vo.getUsername());

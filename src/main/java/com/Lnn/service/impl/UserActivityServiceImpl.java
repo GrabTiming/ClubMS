@@ -1,16 +1,12 @@
 package com.Lnn.service.impl;
 
-import com.Lnn.entity.Activity;
 import com.Lnn.mapper.UserActivityMapper;
 import com.Lnn.service.UserActivityService;
 import com.Lnn.vo.responseVO.ActivityVO;
 import com.Lnn.vo.responseVO.UserVO;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserActivityServiceImpl implements UserActivityService {
@@ -18,6 +14,8 @@ public class UserActivityServiceImpl implements UserActivityService {
     @Autowired
     private UserActivityMapper userActivityMapper;
 
+
+    //根据用户id找参加的活动
     @Override
     public List<ActivityVO> getActivitiesByUserId(int userId) {
 
@@ -30,6 +28,7 @@ public class UserActivityServiceImpl implements UserActivityService {
         return userActivityMapper.getUserByActivityId(activityId);
     }
 
+    //参加活动
     @Override
     public void insert(Integer userId, Integer activityId, Integer state) {
 
@@ -37,6 +36,7 @@ public class UserActivityServiceImpl implements UserActivityService {
 
     }
 
+    //根据活动ID删除活动
     @Override
     public void deleteByActivityId(Integer activityId) {
         userActivityMapper.delete(activityId);

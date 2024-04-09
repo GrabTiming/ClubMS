@@ -1,6 +1,7 @@
 package com.Lnn.controller;
 
 import com.Lnn.DTO.ClubPageQueryDTO;
+import com.Lnn.DTO.UserClubQueryDTO;
 import com.Lnn.entity.Club;
 import com.Lnn.mapper.ClubMapper;
 import com.Lnn.result.PageResult;
@@ -24,9 +25,37 @@ public class ClubController {
      * 分页查询所有的社团
      * @return
      */
-    @GetMapping("/all")
-    public RestBean<PageResult> getAllClub(ClubPageQueryDTO clubPageQueryDTO){
+    @PostMapping("/all")
+    public RestBean<PageResult> getAllClub(@RequestBody ClubPageQueryDTO clubPageQueryDTO){
         PageResult pageResult = clubService.pageQuery(clubPageQueryDTO);
+        System.out.println(pageResult);
+        return RestBean.success(pageResult,"社团查询成功");
+    }
+
+
+    /**
+     * 查询 未申请过的社团
+     * @param userClubQueryDTO
+     * @return
+     */
+    @PostMapping("/search/unIncluded")
+    public RestBean<PageResult> getAllClubAbsent(@RequestBody UserClubQueryDTO userClubQueryDTO)
+    {
+        PageResult pageResult = clubService.getAllClubAbsent(userClubQueryDTO);
+        System.out.println(pageResult);
+        return RestBean.success(pageResult,"社团查询成功");
+    }
+
+
+    /**
+     * 查询 申请过的社团
+     * @param userClubQueryDTO
+     * @return
+     */
+    @PostMapping("/search/included")
+    public RestBean<PageResult> getAllClubIncluded(@RequestBody UserClubQueryDTO userClubQueryDTO)
+    {
+        PageResult pageResult = clubService.getAllClubIncluded(userClubQueryDTO);
         System.out.println(pageResult);
         return RestBean.success(pageResult,"社团查询成功");
     }

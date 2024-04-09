@@ -1,10 +1,7 @@
 package com.Lnn.controller;
 
-import com.Lnn.entity.User;
-import com.Lnn.mapper.UserMapper;
 import com.Lnn.result.RestBean;
 import com.Lnn.service.AuthorityService;
-import com.Lnn.service.UserService;
 import com.Lnn.vo.requestVO.UpdateAuthorityVO;
 import com.Lnn.vo.requestVO.UpdateRoleVO;
 import com.Lnn.vo.responseVO.ClubAuthorityVO;
@@ -32,12 +29,15 @@ public class AuthorityController {
     }
 
 
+    //更新权限
     @PostMapping("/club-authority/updateAuthority")
     public RestBean updateAuthority(@RequestBody UpdateAuthorityVO vo)
     {
         return authorityService.updateAuthority(vo);
     }
 
+
+    //授权
     @PostMapping("/club-authority/updateRole")
     public RestBean updateRole(@RequestBody UpdateRoleVO vo)
     {
