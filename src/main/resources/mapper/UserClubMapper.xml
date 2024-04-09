@@ -14,21 +14,21 @@
         select c.name clubName, authority,uc.role
         from user u left join `user-club` uc on u.id = uc.id
                     left join club c on uc.club_id = c.id
-        where user_id  = #{userId} and state = 2;
+        where user_id  = #{userId} and state = 2
     </select>
 
     <!--修改权限-->
     <update id="updateAuthority">
         update `user-club`
         set authority = #{authority}
-        where user_id = #{userId} and club_id = #{clubId};
+        where user_id = #{userId} and club_id = #{clubId}
     </update>
 
     <!--修改身份-->
     <update id="updateRole">
         update `user-club`
         set role = #{role}
-        where user_id = #{userId} and club_id = #{clubId};
+        where user_id = #{userId} and club_id = #{clubId}
     </update>
 
 </mapper>

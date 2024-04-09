@@ -38,4 +38,20 @@
                               where user_id = #{id})
     </select>
 
+
+    <select id="pageQuery" resultType="com.Lnn.entity.Club">
+        select * from club
+        <where>
+            <if test="str != null">
+                and (
+                name like concat('%', #{str}, '%')
+                or description like concat('%', #{str}, '%')
+                or place like concat('%', #{str}, '%')
+                )
+            </if>
+        </where>
+        order by id
+    </select>
+
+
 </mapper>
