@@ -1,9 +1,7 @@
 package com.Lnn.service.impl;
 
-import com.Lnn.entity.PaymentVO;
-import com.Lnn.entity.User;
+import com.Lnn.vo.requestVO.PaymentVO;
 import com.Lnn.mapper.PaymentMapper;
-import com.Lnn.mapper.UserMapper;
 import com.Lnn.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,9 +40,9 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public boolean addPayment(Integer userId, Integer activityId, Double cost) {
+    public boolean addPayment(PaymentVO paymentVO) {
 
-        return paymentMapper.insert(userId, activityId, cost) > 0;
+        return paymentMapper.insert(paymentVO) > 0;
 
     }
 }

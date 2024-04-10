@@ -3,8 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.Lnn.mapper.PaymentMapper">
 
+
     <!-- 根据用户id 查询缴费信息 -->
-    <select id="getByUserId" resultType="com.Lnn.entity.PaymentVO">
+    <select id="getByUserId" resultType="com.Lnn.vo.requestVO.PaymentVO">
         select username,name activity_name,cost
         from user left join payment on user.id = payment.user_id
                   left join activity on payment.activity_id = activity.id
@@ -12,7 +13,7 @@
     </select>
 
     <!-- 根据活动id 查询缴费信息 -->
-    <select id="getByActivityId" resultType="com.Lnn.entity.PaymentVO">
+    <select id="getByActivityId" resultType="com.Lnn.vo.requestVO.PaymentVO">
         select username,name activity_name,cost
         from user left join payment on user.id = payment.user_id
                   left join activity on payment.activity_id = activity.id

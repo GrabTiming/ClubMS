@@ -15,11 +15,14 @@ public interface UserClubMapper {
 
     //新增用户申请 社团
     Integer insert(UserClub userClub);
+
+    //获取与用户有关的社团的权限
     List<ClubAuthorityVO> getClubAuthorityByUserId(Integer userId);
 
     Integer updateAuthority(UpdateAuthorityVO updateAuthorityVO);
 
     Integer updateRole(UpdateRoleVO updateRoleVO);
 
+    //获取所有社团成员的权限
     List<ClubAuthorityVO> getUserAuthorityByClubId(Integer id);
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Lnn.mapper.ClubApplicationMapper">
+
+
+    <!--新增 社团创建 申请信息-->
+    <insert id="insert">
+        insert into clubapplication (userId, club_name, description, place, email,state)
+        values (#{userid},#{clubName},#{description},#{place},#{email},0)
+    </insert>
+
+    <!--修改 信息 审核状态-->
+    <update id="update">
+        update clubapplication
+        set state = #{state}
+        where  clubapplication.id = #{id};
+    </update>
+
+
+    <!--显示所有社团创建申请-->
+    <select id="getAll" resultType="com.Lnn.vo.responseVO.ClubApplicationVO">
+        select username,c.club_name,c.description,c.place,c.email, c.state
+        from user u left join clubapplication c on u.id = c.userId
+    </select>
+
+    <!--根据用户id查询-->
+    <select id="getByUserId" resultType="com.Lnn.vo.responseVO.ClubApplicationVO">
+        select username,c.club_name,c.description,c.place,c.email, c.state
+        from user u left join clubapplication c on u.id = c.userId
+        where c.userId = #{userId}
+    </select>
+
+    <delete id="delete">
+        delete from clubapplication
+        where id = #{id}
+    </delete>
+
+</mapper>
+

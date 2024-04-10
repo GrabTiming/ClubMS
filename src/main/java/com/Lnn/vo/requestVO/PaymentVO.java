@@ -1,4 +1,4 @@
-package com.Lnn.entity;
+package com.Lnn.vo.requestVO;
 
 
 import lombok.AllArgsConstructor;

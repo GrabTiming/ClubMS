@@ -1,6 +1,6 @@
 package com.Lnn.service;
 
-import com.Lnn.entity.PaymentVO;
+import com.Lnn.vo.requestVO.PaymentVO;
 
 import java.util.List;
 
@@ -23,6 +23,6 @@ public interface PaymentService {
     Double getSumByActivityId(Integer activityId);
 
     //缴费成功的成员
-    boolean addPayment(Integer userId,Integer activityId,Double cost);
+    boolean addPayment(PaymentVO paymentVO);
 
 }
