@@ -3,6 +3,7 @@ package com.Lnn.service.impl;
 import com.Lnn.entity.Payment;
 import com.Lnn.mapper.PaymentMapper;
 import com.Lnn.service.PaymentService;
+import com.Lnn.vo.requestVO.UpdatePaymentVO;
 import com.Lnn.vo.responseVO.PaymentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,10 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public List<PaymentVO> getPaymentByActivityId(Integer activityId) {
         return paymentMapper.getPaymentByActivityId(activityId);
+    }
+
+    @Override
+    public void update(UpdatePaymentVO vo) {
+         paymentMapper.update(vo);
     }
 }

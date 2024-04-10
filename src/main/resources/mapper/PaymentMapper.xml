@@ -33,4 +33,11 @@
         where activity_id = #{activityId}
     </select>
 
+    <update id="update">
+        update payment
+        set state = #{state}
+        where user_id=#{userId} and activity_id = #{activityId}
+    </update>
+
+
 </mapper>

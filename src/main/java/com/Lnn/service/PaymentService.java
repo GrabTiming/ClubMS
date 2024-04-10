@@ -2,6 +2,7 @@ package com.Lnn.service;
 
 
 import com.Lnn.entity.Payment;
+import com.Lnn.vo.requestVO.UpdatePaymentVO;
 import com.Lnn.vo.responseVO.PaymentVO;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface PaymentService {
     List<PaymentVO> getPaymentByUserId(Integer userId);
 
     List<PaymentVO> getPaymentByActivityId(Integer activityId);
+
+    void update(UpdatePaymentVO vo);
 }

@@ -3,12 +3,10 @@ package com.Lnn.controller;
 import com.Lnn.entity.Payment;
 import com.Lnn.result.RestBean;
 import com.Lnn.service.PaymentService;
+import com.Lnn.vo.requestVO.UpdatePaymentVO;
 import com.Lnn.vo.responseVO.PaymentVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,4 +29,12 @@ public class PaymentController {
     {
         return RestBean.success(paymentService.getPaymentByActivityId(activityId));
     }
+
+    @PostMapping("/update")
+    public RestBean updatePayment(@RequestBody UpdatePaymentVO vo)
+    {
+        paymentService.update(vo);
+        return RestBean.success(null,"缴费成功");
+    }
+
 }
