@@ -18,7 +18,7 @@ public interface AttendanceMapper {
     Attendance inquireByUser(int userId);
 
     //更新签到状态
-    Attendance update(String state,int userId);
+    Attendance update(String state,Integer userId,Integer activityId);
 
 
 }

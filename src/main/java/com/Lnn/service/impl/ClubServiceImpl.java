@@ -3,19 +3,28 @@ package com.Lnn.service.impl;
 import com.Lnn.DTO.ClubPageQueryDTO;
 import com.Lnn.DTO.UserClubQueryDTO;
 import com.Lnn.entity.Club;
+import com.Lnn.entity.ClubApplication;
 import com.Lnn.entity.UserClub;
+import com.Lnn.mapper.ClubApplicationMapper;
 import com.Lnn.mapper.ClubMapper;
 import com.Lnn.mapper.UserClubMapper;
 import com.Lnn.result.PageResult;
+import com.Lnn.result.RestBean;
 import com.Lnn.service.ClubService;
 import com.Lnn.util.Constant;
+import com.Lnn.vo.requestVO.ClubApplicationCreateVO;
 import com.Lnn.vo.requestVO.ClubCreateVO;
+import com.Lnn.vo.requestVO.UpdateClubApplicationVO;
+import com.Lnn.vo.responseVO.ClubApplicationVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -32,6 +41,9 @@ public class ClubServiceImpl implements ClubService {
 
     @Autowired
     private UserClubMapper userClubMapper;
+
+    @Autowired
+    private ClubApplicationMapper clubApplicationMapper;
 
     /**
      * 分页查询所有的社团
@@ -120,5 +132,55 @@ public class ClubServiceImpl implements ClubService {
     @Override
     public int getClubName(String clubName) {
         return clubMapper.getClubName(clubName);
+    }
+
+
+    //查询是否存在这个申请
+    @Override
+    public Integer getClubApplication(Integer userId, String clubName) {
+        return clubApplicationMapper.searchClubApplication(userId,clubName);
+    }
+
+    @Override
+    public void addNewClubApplication(ClubApplicationCreateVO vo) {
+         clubApplicationMapper.insert(vo);
+    }
+
+
+
+    @Override
+    public RestBean updateClubApplication(UpdateClubApplicationVO vo) {
+
+        clubApplicationMapper.update(vo);
+
+        if(Objects.equals(vo.getState(), Constant.ACCESS_STATUS))//如果是通过申请
+        {
+            ClubApplication clubApplication = clubApplicationMapper.get(vo.getUserId(),vo.getClubName());
+            ClubCreateVO clubCreateVO = new ClubCreateVO();
+            BeanUtils.copyProperties(clubApplication,clubCreateVO);
+            clubCreateVO.setName(clubApplication.getClubName());
+            if(getClubName(clubCreateVO.getName())>0)
+            {
+                vo.setState(1);
+                clubApplicationMapper.update(vo);
+                return RestBean.failure(400,"社团("+clubCreateVO.getName()+")已存在，否决该申请");
+            }
+            Club club =addNewClub(clubCreateVO);
+            return RestBean.success(club,"操作成功,"+"社团("+vo.getClubName()+")创建成功");
+        }
+        //不是通过就是不通过
+        return RestBean.success(null,"操作成功,"+"否决社团("+vo.getClubName()+")创建");
+    }
+
+    @Override
+    public List<ClubApplicationVO> getClubApplicationByUserId(Integer userId) {
+
+        return clubApplicationMapper.getByUserId(userId);
+
+    }
+
+    @Override
+    public List<ClubApplicationVO> getAllClubApplication() {
+        return clubApplicationMapper.getAll();
     }
 }

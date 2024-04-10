@@ -12,10 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClubApplicationVO {
+
+    private Integer userId;
     /**
      * 申请人姓名
      */
-    private Integer username;
+    private String username;
     /**
      * 社团名称
      */

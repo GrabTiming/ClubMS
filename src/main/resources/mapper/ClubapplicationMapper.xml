@@ -13,27 +13,43 @@
     <update id="update">
         update clubapplication
         set state = #{state}
-        where  clubapplication.id = #{id};
+        where  userId = #{userId} and club_name = #{clubName}
     </update>
 
 
     <!--显示所有社团创建申请-->
     <select id="getAll" resultType="com.Lnn.vo.responseVO.ClubApplicationVO">
-        select username,c.club_name,c.description,c.place,c.email, c.state
-        from user u left join clubapplication c on u.id = c.userId
+        select c.userId, username,c.club_name,c.description,c.place,c.email, c.state
+        from  clubapplication  c left join user u on u.id = c.userId
     </select>
 
     <!--根据用户id查询-->
     <select id="getByUserId" resultType="com.Lnn.vo.responseVO.ClubApplicationVO">
-        select username,c.club_name,c.description,c.place,c.email, c.state
+        select c.userId, username,c.club_name,c.description,c.place,c.email, c.state
         from user u left join clubapplication c on u.id = c.userId
         where c.userId = #{userId}
     </select>
+
 
     <delete id="delete">
         delete from clubapplication
         where id = #{id}
     </delete>
+
+    <!--查询是否存在重复的申请-->
+    <select id="searchClubApplication" resultType="java.lang.Integer">
+        select count(*)
+        from clubapplication
+        where userId = #{userId} and club_name = #{clubName}
+        limit 1
+    </select>
+
+    <!--查询 申请信息-->
+    <select id="get" resultType="com.Lnn.entity.ClubApplication">
+        select userId, club_name, description, place, email
+        from clubapplication
+        where userId = #{userId} and club_name = #{clubName}
+    </select>
 
 </mapper>
 

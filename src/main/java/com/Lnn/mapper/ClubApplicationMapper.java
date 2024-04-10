@@ -3,7 +3,9 @@ package com.Lnn.mapper;
 
 import com.Lnn.entity.ClubApplication;
 import com.Lnn.vo.requestVO.ClubApplicationCreateVO;
+import com.Lnn.vo.requestVO.UpdateClubApplicationVO;
 import com.Lnn.vo.responseVO.ClubApplicationVO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
  *
  * @since 2024-04-10 08:11:49
  */
+@Mapper
 public interface ClubApplicationMapper {
 
 
@@ -25,10 +28,15 @@ public interface ClubApplicationMapper {
     Integer insert(ClubApplicationCreateVO clubApplicationCreateVO);
 
     //修改申请状态
-    Integer update(Integer id,Integer state);
+    Integer update(UpdateClubApplicationVO vo);
 
 
     //删除申请
     Integer delete(Integer id);
+
+    //查询是否存在重复的申请
+    Integer searchClubApplication(Integer userId, String clubName);
+
+    ClubApplication get(Integer userId, String clubName);
 }
 

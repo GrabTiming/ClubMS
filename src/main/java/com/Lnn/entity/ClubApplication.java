@@ -21,7 +21,7 @@ public class ClubApplication {
     /**
      * 创建者
      */
-    private Integer userid;
+    private Integer userId;
     /**
      * 社团名称
      */

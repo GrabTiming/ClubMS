@@ -4,7 +4,13 @@ import com.Lnn.DTO.ClubPageQueryDTO;
 import com.Lnn.DTO.UserClubQueryDTO;
 import com.Lnn.entity.Club;
 import com.Lnn.result.PageResult;
+import com.Lnn.result.RestBean;
+import com.Lnn.vo.requestVO.ClubApplicationCreateVO;
 import com.Lnn.vo.requestVO.ClubCreateVO;
+import com.Lnn.vo.requestVO.UpdateClubApplicationVO;
+import com.Lnn.vo.responseVO.ClubApplicationVO;
+
+import java.util.List;
 
 
 /**
@@ -44,4 +50,15 @@ public interface ClubService {
 
     //查询社团名是否存在
     int getClubName(String clubName);
+
+
+    Integer getClubApplication(Integer userId,String clubName);
+
+    void addNewClubApplication(ClubApplicationCreateVO vo);
+
+    RestBean updateClubApplication(UpdateClubApplicationVO vo);
+
+    List<ClubApplicationVO> getClubApplicationByUserId(Integer userId);
+
+    List<ClubApplicationVO> getAllClubApplication();
 }

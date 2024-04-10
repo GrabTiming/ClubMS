@@ -10,13 +10,18 @@ import com.Lnn.result.PageResult;
 import com.Lnn.result.RestBean;
 import com.Lnn.service.ClubService;
 import com.Lnn.util.Constant;
+import com.Lnn.vo.requestVO.ClubApplicationCreateVO;
 import com.Lnn.vo.requestVO.ClubCreateVO;
+import com.Lnn.vo.requestVO.UpdateClubApplicationVO;
+import com.Lnn.vo.responseVO.ClubApplicationVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.bcel.Const;
 import org.apiguardian.api.API;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -69,6 +74,45 @@ public class ClubController {
         return RestBean.success(pageResult,"社团查询成功");
     }
 
+
+    /**
+     * 提交社团创建申请
+     */
+    @PostMapping("/add-clubApplication")
+    public RestBean addNewClubApplication(@RequestBody ClubApplicationCreateVO vo){
+
+        if(clubService.getClubName(vo.getClubName())>0)
+        {
+            return RestBean.failure(400,"社团名重复");
+        }
+        if(clubService.getClubApplication(vo.getUserid(),vo.getClubName())>0)
+        {
+            return RestBean.failure(400,"社团创建申请重复提交！");
+        }
+        clubService.addNewClubApplication(vo);
+        return RestBean.success(null,"社团("+vo.getClubName()+")创建申请已提交");
+    }
+
+    /**
+     * 修改  社团创建申请 状态
+     */
+    @PostMapping("/update-clubApplication")
+    public RestBean updateClubApplication(@RequestBody UpdateClubApplicationVO vo){
+
+        return clubService.updateClubApplication(vo);
+    }
+
+    @GetMapping ("/get-clubApplication/{id}")
+    public RestBean<List<ClubApplicationVO>> getClubApplicationByUserId(@PathVariable("id") Integer userId)
+    {
+        return RestBean.success(clubService.getClubApplicationByUserId(userId));
+    }
+
+    @GetMapping ("/get-allClubApplication")
+    public RestBean<List<ClubApplicationVO>> getAllClubApplication()
+    {
+        return RestBean.success(clubService.getAllClubApplication());
+    }
 
     /**
      * 新增社团
