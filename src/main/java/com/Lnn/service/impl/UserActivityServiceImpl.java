@@ -36,11 +36,4 @@ public class UserActivityServiceImpl implements UserActivityService {
 
     }
 
-    //根据活动ID删除活动
-    @Override
-    public void deleteByActivityId(Integer activityId) {
-        userActivityMapper.delete(activityId);
-    }
-
-
 }

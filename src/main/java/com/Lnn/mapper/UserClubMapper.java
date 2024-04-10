@@ -35,5 +35,7 @@ public interface UserClubMapper {
 
     void delete(Integer userId, Integer clubId);
 
+    int existsSignIn(Integer userId, Integer clubId);
+
     //查询社团的 入团报名申请
 }

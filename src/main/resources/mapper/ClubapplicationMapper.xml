@@ -21,6 +21,7 @@
     <select id="getAll" resultType="com.Lnn.vo.responseVO.ClubApplicationVO">
         select c.id,c.userId, username,c.club_name,c.description,c.place,c.email, c.state
         from  clubapplication  c left join user u on u.id = c.userId
+        where state
     </select>
 
     <!--根据用户id查询-->

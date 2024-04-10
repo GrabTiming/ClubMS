@@ -41,11 +41,12 @@
     </select>
 
 
+    <!--获取 入团申请-->
     <select id="getSignInByClubId" resultType="com.Lnn.vo.responseVO.SignStateVO">
         select u.id userId,u.username,c.id clubId,c.name clubName,uc.state
         from `user-club` uc left join user u on uc.user_id = u.id
                             left join club c on uc.club_id = c.id
-        where uc.club_id = #{clubId}
+        where uc.club_id = #{clubId} and state = 0
     </select>
 
 
@@ -60,5 +61,13 @@
         delete from `user-club`
         where user_id = #{userId} and club_id = #{clubId}
     </delete>
+
+
+    <!--判断是否已存在-->
+    <select id="existsSignIn" resultType="java.lang.Integer">
+        select count(*)
+        from `user-club`
+        where user_id = #{userId} and club_id = #{clubId}
+    </select>
 
 </mapper>

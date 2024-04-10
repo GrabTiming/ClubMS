@@ -1,8 +1,9 @@
 package com.Lnn.service.impl;
 
-import com.Lnn.vo.requestVO.PaymentVO;
+import com.Lnn.entity.Payment;
 import com.Lnn.mapper.PaymentMapper;
 import com.Lnn.service.PaymentService;
+import com.Lnn.vo.responseVO.PaymentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,28 +22,18 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private PaymentMapper paymentMapper;
 
-
     @Override
-    public List<PaymentVO> getByUserId(Integer userId) {
-
-        return paymentMapper.getByUserId(userId);
-
+    public Integer addPayment(Payment payment) {
+        return paymentMapper.insert(payment);
     }
 
     @Override
-    public List<PaymentVO> getByActivityId(Integer activityId) {
-        return paymentMapper.getByActivityId(activityId);
+    public List<PaymentVO> getPaymentByUserId(Integer userId) {
+        return paymentMapper.getPaymentByUserId(userId);
     }
 
     @Override
-    public Double getSumByActivityId(Integer activityId) {
-        return paymentMapper.getSumByActivityId(activityId);
-    }
-
-    @Override
-    public boolean addPayment(PaymentVO paymentVO) {
-
-        return paymentMapper.insert(paymentVO) > 0;
-
+    public List<PaymentVO> getPaymentByActivityId(Integer activityId) {
+        return paymentMapper.getPaymentByActivityId(activityId);
     }
 }

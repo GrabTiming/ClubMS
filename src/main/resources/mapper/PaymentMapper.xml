@@ -5,20 +5,7 @@
 
 
     <!-- 根据用户id 查询缴费信息 -->
-    <select id="getByUserId" resultType="com.Lnn.vo.requestVO.PaymentVO">
-        select username,name activity_name,cost
-        from user left join payment on user.id = payment.user_id
-                  left join activity on payment.activity_id = activity.id
-        where user_id = #{userId};
-    </select>
 
-    <!-- 根据活动id 查询缴费信息 -->
-    <select id="getByActivityId" resultType="com.Lnn.vo.requestVO.PaymentVO">
-        select username,name activity_name,cost
-        from user left join payment on user.id = payment.user_id
-                  left join activity on payment.activity_id = activity.id
-        where activity_id = #{activityId};
-    </select>
 
     <select id="getSumByActivityId" resultType="java.lang.Double">
         select sum(cost)
@@ -26,9 +13,24 @@
         where activity_id = #{activityId};
     </select>
 
+
     <insert id="insert" useGeneratedKeys="true">
-        insert into payment (user_id, activity_id, cost) values (#{userId},#{activityId},#{cost});
+        insert into payment (user_id, activity_id, cost,state) values (#{userId},#{activityId},#{cost},#{state});
     </insert>
 
+    <select id="getPaymentByUserId" resultType="com.Lnn.vo.responseVO.PaymentVO">
+        select user_id,username, activity_id,name activityName, p.cost, state
+        from  payment p left join user u on p.user_id = u.id
+                        left join activity a on p.activity_id = a.id
+        where user_id = #{userId}
+    </select>
+
+
+    <select id="getPaymentByActivityId" resultType="com.Lnn.vo.responseVO.PaymentVO">
+        select user_id,username, activity_id,name activityName, p.cost, state
+        from  payment p left join user u on p.user_id = u.id
+                        left join activity a on p.activity_id = a.id
+        where activity_id = #{activityId}
+    </select>
 
 </mapper>

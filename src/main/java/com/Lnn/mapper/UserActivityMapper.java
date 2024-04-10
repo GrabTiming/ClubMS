@@ -20,6 +20,7 @@ public interface UserActivityMapper {
     //修改报名状态：未审核0 -> 1未通过 2 通过
     Integer update(Integer userId,Integer activityId,Integer state);
     //删除信息
-    void delete(Integer activityId);
+    void delete(Integer userId,Integer activityId);
 
+    int exists(Integer userId, Integer activityId);
 }

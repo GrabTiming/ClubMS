@@ -222,6 +222,10 @@ public class ClubServiceImpl implements ClubService {
     public RestBean addSignIn(ClubSignInVO clubSignInVO) {
 
         UserClub userClub = new UserClub();
+        if(userClubMapper.existsSignIn(clubSignInVO.getUserId(),clubSignInVO.getClubId())>0)
+        {
+            return RestBean.failure(400,"用户已在该社团或已提交入团申请");
+        }
         userClub.setUserId(clubSignInVO.getUserId());
         userClub.setClubId(clubSignInVO.getClubId());
         userClub.setAuthority(1);
@@ -230,7 +234,7 @@ public class ClubServiceImpl implements ClubService {
 
         userClubMapper.insert(userClub);
 
-        return RestBean.success(null,"申请已提交");
+        return RestBean.success(null,"申请提交成功");
 
     }
 
@@ -256,6 +260,11 @@ public class ClubServiceImpl implements ClubService {
 
         clubApplicationMapper.delete(id);
 
+    }
+
+    @Override
+    public void deleteUserClub(Integer userId, Integer clubId) {
+        userClubMapper.delete(userId,clubId);
     }
 
     //查询

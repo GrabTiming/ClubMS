@@ -15,7 +15,5 @@ public interface UserActivityService {
     //参加活动
     void insert(Integer userId,Integer activityId,Integer state);
 
-    //根据活动ID删除活动
-    void deleteByActivityId(Integer activityId);
 
 }

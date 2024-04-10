@@ -23,7 +23,7 @@
 
     <delete id="delete">
         delete from `user-activity`
-        where activity_id = #{activityId}
+        where activity_id = #{activityId} and user_id = #{userId}
     </delete>
 
     <!--更改报名状态 0未审核，1不通过，2通过-->
@@ -32,5 +32,12 @@
         set state = #{state}
         where user_id = #{userId} and activity_id = #{activityId}
     </update>
+
+
+    <select id="exists" resultType="java.lang.Integer">
+        select count(*)
+        from `user-activity`
+        where user_id = #{userId} and activity_id = #{activityId}
+    </select>
 
 </mapper>

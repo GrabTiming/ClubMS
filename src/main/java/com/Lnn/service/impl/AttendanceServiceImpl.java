@@ -2,8 +2,11 @@ package com.Lnn.service.impl;
 
 import com.Lnn.entity.Attendance;
 
+import com.Lnn.mapper.ActivityMapper;
 import com.Lnn.mapper.AttendanceMapper;
+import com.Lnn.mapper.UserMapper;
 import com.Lnn.service.AttendanceService;
+import com.Lnn.vo.requestVO.UpdateAttendanceVO;
 import com.Lnn.vo.responseVO.AttendanceVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,12 @@ public class AttendanceServiceImpl implements AttendanceService {
     @Autowired
     private AttendanceMapper attendanceMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private ActivityMapper activityMapper;
+
     //查询活动签到情况
     @Override
     public List<AttendanceVO> inquireByActivity(Integer activityId) {
@@ -36,10 +45,18 @@ public class AttendanceServiceImpl implements AttendanceService {
         return attendanceMapper.inquireByUser(userId);
     }
 
-    //更新签到状态
     @Override
-    public AttendanceVO update(Integer userId,Integer activityId,Integer state) {
+    public void update(UpdateAttendanceVO vo) {
 
-        return attendanceMapper.update(userId,activityId,state);
+        String username = vo.getUsername();
+        String activityName =vo.getActivityName();
+        Integer state = vo.getState();
+
+        Integer userId = userMapper.getIdByUsername(username);
+        Integer activityId = activityMapper.getIdByActivityName(activityName);
+        attendanceMapper.update(userId,activityId,state);
     }
+
+    //更新签到状态
+
 }

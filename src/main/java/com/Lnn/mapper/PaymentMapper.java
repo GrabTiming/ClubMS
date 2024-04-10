@@ -1,22 +1,19 @@
 package com.Lnn.mapper;
 
-import com.Lnn.vo.requestVO.PaymentVO;
+import com.Lnn.entity.Payment;
+import com.Lnn.vo.responseVO.PaymentVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
 public interface PaymentMapper {
+    Integer insert(Payment payment);
 
-    //根据用户id查询信息
-    List<PaymentVO> getByUserId(Integer userId);
+    List<PaymentVO> getPaymentByUserId(Integer userId);
 
-    //根据社团id查询信息
-    List<PaymentVO> getByActivityId(Integer activityId);
+    List<PaymentVO> getPaymentByActivityId(Integer activityId);
 
-    Double getSumByActivityId(Integer activityId);
-
-    int insert(PaymentVO vo);
 
     //增加缴费信息
 

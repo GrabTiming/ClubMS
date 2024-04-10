@@ -3,6 +3,7 @@ package com.Lnn.controller;
 import com.Lnn.entity.Attendance;
 import com.Lnn.result.RestBean;
 import com.Lnn.service.AttendanceService;
+import com.Lnn.vo.requestVO.UpdateAttendanceVO;
 import com.Lnn.vo.responseVO.AttendanceVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +41,10 @@ public class AttendanceController {
 
     //更新签到状态
     @PostMapping("/update")
-    public RestBean<AttendanceVO> update(@RequestParam Integer state,
-                                       @RequestParam int userId,
-                                       @RequestParam int activityId){
-        AttendanceVO attendance = attendanceService.update(userId,activityId,state);
+    public RestBean<AttendanceVO> update(@RequestBody UpdateAttendanceVO vo){
 
-        return RestBean.success(attendance);
+        attendanceService.update(vo);
+
+        return RestBean.success(null,"签到成功");
     }
 }

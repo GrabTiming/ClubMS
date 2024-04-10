@@ -98,6 +98,15 @@ public class ClubController {
         return RestBean.success(clubService.getSignInByClubId(clubId));
     }
 
+    //用户退出社团
+    @DeleteMapping("/club-signOut")
+    public RestBean deleteUserClub(@RequestParam("userId") Integer userId,
+                                   @RequestParam("clubId") Integer clubId)
+    {
+        clubService.deleteUserClub(userId,clubId);
+        return RestBean.success();
+    }
+
 
     /**
      * 提交社团创建申请
@@ -133,6 +142,7 @@ public class ClubController {
         return RestBean.success(clubService.getClubApplicationByUserId(userId));
     }
 
+    //用户点击确认后删除 创建社团申请 信息
     @DeleteMapping("/delete-clubApplication/{id}")
     public RestBean deleteClubApplication(@PathVariable("id") Integer id)
     {

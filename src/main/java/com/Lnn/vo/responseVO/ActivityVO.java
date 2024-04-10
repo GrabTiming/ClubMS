@@ -26,6 +26,9 @@ public class ActivityVO {
     /**
      * 结束时间
      */
+
+    private Double cost;
+
     private Date endTime;
 
     private Integer state;

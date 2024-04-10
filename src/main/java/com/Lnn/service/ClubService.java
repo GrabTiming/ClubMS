@@ -72,4 +72,7 @@ public interface ClubService {
 
     //删除
     void deleteClubApplication(Integer id);
+
+
+    void deleteUserClub(Integer userId, Integer clubId);
 }

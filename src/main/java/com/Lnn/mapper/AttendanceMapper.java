@@ -21,7 +21,8 @@ public interface AttendanceMapper {
     List<AttendanceVO> inquireByUser(Integer userId);
 
     //更新签到状态
-    AttendanceVO update(Integer userId,Integer activityId,Integer state);
+    void update(Integer userId,Integer activityId,Integer state);
 
 
+    void insert(Integer userId, Integer activityId, Integer state);
 }

@@ -1,6 +1,7 @@
 package com.Lnn.service;
 
 import com.Lnn.entity.Attendance;
+import com.Lnn.vo.requestVO.UpdateAttendanceVO;
 import com.Lnn.vo.responseVO.AttendanceVO;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface AttendanceService {
 
 
     //更新签到状态
-    AttendanceVO update(Integer userId,Integer activityId,Integer state);
+    void update(UpdateAttendanceVO vo);
 
 
 

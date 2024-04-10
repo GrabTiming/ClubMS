@@ -1,27 +1,20 @@
-package com.Lnn.vo.requestVO;
+package com.Lnn.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-/**
- * 对 活动报名 审核 的前端VO数据
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ActivityRegisterVO {
+public class Payment {
 
     private Integer userId;
 
-    private String username;
-
-    private String activityName;
+    private Integer activityId;
 
     private Double cost;
 
-    //将要设置的状态
     private Integer state;
 
 }

@@ -7,6 +7,7 @@ import com.Lnn.service.ActivityService;
 import com.Lnn.vo.requestVO.ActivityCreateVO;
 import com.Lnn.vo.requestVO.ActivityRegisterVO;
 import com.Lnn.vo.responseVO.ActivityVO;
+import com.Lnn.vo.responseVO.DeleteActivityRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,19 +49,27 @@ public class ActivityController {
      * @return 用户
      */
     @PostMapping("/userRegister")
-    public RestBean<String> userRegister(@RequestBody ActivityRegisterVO vo)
+    public RestBean userRegister(@RequestBody ActivityRegisterVO vo)
     {
+
         return activityService.addUserRegister(vo);
     }
 
 
     //更新报名信息
     @PostMapping("/updateUserRegister")
-    public RestBean<String> updateUserRegister(@RequestBody ActivityRegisterVO vo)
+    public RestBean updateUserRegister(@RequestBody ActivityRegisterVO vo)
     {
         return activityService.updateUserRegister(vo);
     }
 
+
+    //退出活动
+    @DeleteMapping("/deleteUserRegister")
+    public RestBean deleteRegister(@RequestBody DeleteActivityRegisterVO vo)
+    {
+        return activityService.deleteRegister(vo);
+    }
     /**
      * 更新活动信息
      * @param activityVO

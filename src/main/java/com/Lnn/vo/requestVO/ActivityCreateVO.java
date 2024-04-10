@@ -18,6 +18,9 @@ public class ActivityCreateVO {
      * 活动描述
      */
     private String description;
+
+    private Double cost;
+
     /**
      * 开始时间
      */

@@ -3,6 +3,7 @@
 <mapper namespace="com.Lnn.mapper.AttendanceMapper">
 
 
+
     <update id="update">
         update attendance
         set state = #{state}
@@ -22,4 +23,11 @@
                              left join activity act on att.activity_id =act.id
         where att.user_id = #{userId}
     </select>
+
+
+    <insert id="insert">
+        insert into attendance (user_id, activity_id, state)
+        values(#{userId},#{activityId},#{state})
+    </insert>
+
 </mapper>

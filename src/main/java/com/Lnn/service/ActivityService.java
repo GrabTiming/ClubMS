@@ -5,6 +5,7 @@ import com.Lnn.result.RestBean;
 import com.Lnn.vo.requestVO.ActivityCreateVO;
 import com.Lnn.vo.requestVO.ActivityRegisterVO;
 import com.Lnn.vo.responseVO.ActivityVO;
+import com.Lnn.vo.responseVO.DeleteActivityRegisterVO;
 import com.Lnn.vo.responseVO.UserVO;
 
 import java.util.List;
@@ -29,11 +30,14 @@ public interface ActivityService {
 
 
     // 新增用户报名信息
-    RestBean<String> addUserRegister(ActivityRegisterVO vo);
+    RestBean addUserRegister(ActivityRegisterVO vo);
 
     //修改用户报名信息
     RestBean<String> updateUserRegister(ActivityRegisterVO vo);
 
 
     List<ActivityVO> getActivityByUserId(Integer userId);
+
+    RestBean deleteRegister(DeleteActivityRegisterVO vo);
+
 }
