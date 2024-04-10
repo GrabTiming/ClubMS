@@ -251,6 +251,13 @@ public class ClubServiceImpl implements ClubService {
         }
     }
 
+    @Override
+    public void deleteClubApplication(Integer id) {
+
+        clubApplicationMapper.delete(id);
+
+    }
+
     //查询
 
 }

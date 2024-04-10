@@ -19,13 +19,13 @@
 
     <!--显示所有社团创建申请-->
     <select id="getAll" resultType="com.Lnn.vo.responseVO.ClubApplicationVO">
-        select c.userId, username,c.club_name,c.description,c.place,c.email, c.state
+        select c.id,c.userId, username,c.club_name,c.description,c.place,c.email, c.state
         from  clubapplication  c left join user u on u.id = c.userId
     </select>
 
     <!--根据用户id查询-->
     <select id="getByUserId" resultType="com.Lnn.vo.responseVO.ClubApplicationVO">
-        select c.userId, username,c.club_name,c.description,c.place,c.email, c.state
+        select c.id , c.userId, username,c.club_name,c.description,c.place,c.email, c.state
         from user u left join clubapplication c on u.id = c.userId
         where c.userId = #{userId}
     </select>

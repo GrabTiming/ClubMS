@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ClubApplicationVO {
 
+    private Integer id;
+
     private Integer userId;
     /**
      * 申请人姓名

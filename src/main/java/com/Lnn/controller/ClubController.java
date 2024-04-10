@@ -126,12 +126,21 @@ public class ClubController {
         return clubService.updateClubApplication(vo);
     }
 
+    //根据用户id查询 他 创建社团的申请
     @GetMapping ("/get-clubApplication/{id}")
     public RestBean<List<ClubApplicationVO>> getClubApplicationByUserId(@PathVariable("id") Integer userId)
     {
         return RestBean.success(clubService.getClubApplicationByUserId(userId));
     }
 
+    @DeleteMapping("/delete-clubApplication/{id}")
+    public RestBean deleteClubApplication(@PathVariable("id") Integer id)
+    {
+        clubService.deleteClubApplication(id);
+        return RestBean.success();
+    }
+
+    //管理员权限 查看所有
     @GetMapping ("/get-allClubApplication")
     public RestBean<List<ClubApplicationVO>> getAllClubApplication()
     {

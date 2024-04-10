@@ -68,4 +68,8 @@ public interface ClubService {
     List<SignStateVO> getSignInByClubId(Integer clubId);
 
     void updateSignIn(UpdateSignInVO updateSignInVO);
+
+
+    //删除
+    void deleteClubApplication(Integer id);
 }
