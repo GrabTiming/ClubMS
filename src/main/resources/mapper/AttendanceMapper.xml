@@ -9,12 +9,17 @@
         where user_id = #{userId} and activity_id = #{activityId}
     </update>
 
-    <select id="inquireByActivity" resultType="com.Lnn.entity.Attendance">
-        select * from attendance
-        where activity_id = #{activityId}
+    <select id="inquireByActivity" resultType="com.Lnn.vo.responseVO.AttendanceVO">
+        select att.user_id userId,u.username username,att.activity_id activityId,act.name activityName,state
+        from attendance att left join user u on att.user_id = u.id
+                            left join activity act on att.activity_id =act.id
+        where att.activity_id = #{activityId}
     </select>
-    <select id="inquireByUser" resultType="com.Lnn.entity.Attendance">
-        select * from attendance
-        where user_id = #{userId}
+
+        <select id="inquireByUser" resultType="com.Lnn.vo.responseVO.AttendanceVO">
+        select  u.id,u.username, act.id activityId,act.name activityName,state
+        from attendance  att left join user u on att.user_id = u.id
+                             left join activity act on att.activity_id =act.id
+        where att.user_id = #{userId}
     </select>
 </mapper>

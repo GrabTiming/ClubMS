@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ActivityRegisterVO {
 
+    private Integer userId;
+
     private String username;
 
     private String activityName;

@@ -53,6 +53,7 @@ public class ActivityController {
         return activityService.addUserRegister(vo);
     }
 
+
     //更新报名信息
     @PostMapping("/updateUserRegister")
     public RestBean<String> updateUserRegister(@RequestBody ActivityRegisterVO vo)

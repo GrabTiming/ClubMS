@@ -9,6 +9,7 @@
     </insert>
 
 
+
     <!--查询与用户有关的社团的权限-->
     <select id="getClubAuthorityByUserId" resultType="com.Lnn.vo.responseVO.ClubAuthorityVO">
         select  u.id,u.username, c.id clubId, c.name clubName, authority,uc.role
@@ -32,12 +33,32 @@
         where user_id = #{userId} and club_id = #{clubId}
     </update>
 
-
     <select id="getUserAuthorityByClubId" resultType="com.Lnn.vo.responseVO.ClubAuthorityVO">
         select  u.id userId,u.username, c.id clubId, c.name clubName, authority,uc.role
         from user u left join `user-club` uc on u.id = uc.user_id
                     left join club c on uc.club_id = c.id
         where club_id = #{clubId} and state = 2
     </select>
+
+
+    <select id="getSignInByClubId" resultType="com.Lnn.vo.responseVO.SignStateVO">
+        select u.id userId,u.username,c.id clubId,c.name clubName,uc.state
+        from `user-club` uc left join user u on uc.user_id = u.id
+                            left join club c on uc.club_id = c.id
+        where uc.club_id = #{clubId}
+    </select>
+
+
+    <update id="updateSignIn">
+        update `user-club`
+        set state = #{state}
+        where user_id = #{userId} and club_id = #{clubId}
+    </update>
+
+
+    <delete id="delete">
+        delete from `user-club`
+        where user_id = #{userId} and club_id = #{clubId}
+    </delete>
 
 </mapper>

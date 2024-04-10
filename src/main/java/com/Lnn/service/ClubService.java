@@ -5,10 +5,9 @@ import com.Lnn.DTO.UserClubQueryDTO;
 import com.Lnn.entity.Club;
 import com.Lnn.result.PageResult;
 import com.Lnn.result.RestBean;
-import com.Lnn.vo.requestVO.ClubApplicationCreateVO;
-import com.Lnn.vo.requestVO.ClubCreateVO;
-import com.Lnn.vo.requestVO.UpdateClubApplicationVO;
+import com.Lnn.vo.requestVO.*;
 import com.Lnn.vo.responseVO.ClubApplicationVO;
+import com.Lnn.vo.responseVO.SignStateVO;
 
 import java.util.List;
 
@@ -61,4 +60,12 @@ public interface ClubService {
     List<ClubApplicationVO> getClubApplicationByUserId(Integer userId);
 
     List<ClubApplicationVO> getAllClubApplication();
+
+
+    RestBean addSignIn(ClubSignInVO clubSignInVO);
+
+
+    List<SignStateVO> getSignInByClubId(Integer clubId);
+
+    void updateSignIn(UpdateSignInVO updateSignInVO);
 }

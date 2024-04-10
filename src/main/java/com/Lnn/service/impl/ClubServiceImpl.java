@@ -12,12 +12,15 @@ import com.Lnn.result.PageResult;
 import com.Lnn.result.RestBean;
 import com.Lnn.service.ClubService;
 import com.Lnn.util.Constant;
-import com.Lnn.vo.requestVO.ClubApplicationCreateVO;
-import com.Lnn.vo.requestVO.ClubCreateVO;
-import com.Lnn.vo.requestVO.UpdateClubApplicationVO;
+import com.Lnn.util.JwtClaimsConstant;
+import com.Lnn.util.JwtProperties;
+import com.Lnn.util.JwtUtil;
+import com.Lnn.vo.requestVO.*;
 import com.Lnn.vo.responseVO.ClubApplicationVO;
+import com.Lnn.vo.responseVO.SignStateVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +48,9 @@ public class ClubServiceImpl implements ClubService {
     @Autowired
     private ClubApplicationMapper clubApplicationMapper;
 
+
+    @Autowired
+    private JwtProperties jwtProperties;
     /**
      * 分页查询所有的社团
      * @param clubPageQueryDTO
@@ -61,6 +67,26 @@ public class ClubServiceImpl implements ClubService {
     /**
      * 增加表
      */
+//    @Override
+//    //@Transactional//因为涉及多个表，所以加上这个注解，要么全部成功要么全部失败
+//    public Club addNewClub(ClubCreateVO clubCreateVO) {
+//
+//        Club club = new Club();
+//        BeanUtils.copyProperties(clubCreateVO,club);
+//        clubMapper.insert(club);
+//        System.out.println(club);
+//
+//        //还要将创建人 修改为 社团的社长
+//        UserClub userClub = new UserClub();
+//        userClub.setClubId(club.getId());
+//        userClub.setUserId(clubCreateVO.getUserId());
+//        userClub.setAuthority(Constant.CLUB_LEADER_AUTHORITY);
+//        userClub.setRole(Constant.CLUB_LEADER_ROLE);
+//        userClub.setState(Constant.ACCESS_STATUS);
+//        userClubMapper.insert(userClub);
+//        return club;
+//    }
+
     @Override
     //@Transactional//因为涉及多个表，所以加上这个注解，要么全部成功要么全部失败
     public Club addNewClub(ClubCreateVO clubCreateVO) {
@@ -73,13 +99,20 @@ public class ClubServiceImpl implements ClubService {
         //还要将创建人 修改为 社团的社长
         UserClub userClub = new UserClub();
         userClub.setClubId(club.getId());
-        userClub.setUserId(clubCreateVO.getUserId());
+
+        //从token中拿到userId
+        Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(),Constant.TOKEN);
+
+        Integer userId = (Integer) claims.get(JwtClaimsConstant.USER_ID);
+        System.out.println("当前用户id为"+userId);
+        userClub.setUserId(userId);
         userClub.setAuthority(Constant.CLUB_LEADER_AUTHORITY);
         userClub.setRole(Constant.CLUB_LEADER_ROLE);
         userClub.setState(Constant.ACCESS_STATUS);
         userClubMapper.insert(userClub);
         return club;
     }
+
 
     /**
      * 删除社团
@@ -159,6 +192,7 @@ public class ClubServiceImpl implements ClubService {
             ClubCreateVO clubCreateVO = new ClubCreateVO();
             BeanUtils.copyProperties(clubApplication,clubCreateVO);
             clubCreateVO.setName(clubApplication.getClubName());
+
             if(getClubName(clubCreateVO.getName())>0)
             {
                 vo.setState(1);
@@ -183,4 +217,40 @@ public class ClubServiceImpl implements ClubService {
     public List<ClubApplicationVO> getAllClubApplication() {
         return clubApplicationMapper.getAll();
     }
+
+    @Override
+    public RestBean addSignIn(ClubSignInVO clubSignInVO) {
+
+        UserClub userClub = new UserClub();
+        userClub.setUserId(clubSignInVO.getUserId());
+        userClub.setClubId(clubSignInVO.getClubId());
+        userClub.setAuthority(1);
+        userClub.setRole(0);
+        userClub.setState(Constant.DEFAULT_STATUS);
+
+        userClubMapper.insert(userClub);
+
+        return RestBean.success(null,"申请已提交");
+
+    }
+
+    @Override
+    public List<SignStateVO> getSignInByClubId(Integer clubId) {
+
+        return userClubMapper.getSignInByClubId(clubId);
+
+    }
+
+    @Override
+    public void updateSignIn(UpdateSignInVO vo) {
+
+        userClubMapper.updateSignIn(vo);
+        if(Objects.equals(vo.getState(), Constant.NOT_ACCESS_STATUS))
+        {
+            userClubMapper.delete(vo.getUserId(),vo.getClubId());
+        }
+    }
+
+    //查询
+
 }

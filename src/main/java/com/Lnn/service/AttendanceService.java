@@ -1,6 +1,9 @@
 package com.Lnn.service;
 
 import com.Lnn.entity.Attendance;
+import com.Lnn.vo.responseVO.AttendanceVO;
+
+import java.util.List;
 
 /**
  * (Attendance)表服务接口
@@ -11,15 +14,15 @@ import com.Lnn.entity.Attendance;
 public interface AttendanceService {
 
     //查询活动签到情况
-    Attendance inquireByActivity(int activityId);
+    List<AttendanceVO> inquireByActivity(Integer activityId);
 
 
     //查询用户签到情况
-    Attendance inquireByUser(int userId);
+    List<AttendanceVO> inquireByUser(Integer userId);
 
 
     //更新签到状态
-    Attendance update(String state,int userId);
+    AttendanceVO update(Integer userId,Integer activityId,Integer state);
 
 
 

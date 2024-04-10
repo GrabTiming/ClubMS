@@ -1,24 +1,24 @@
 package com.Lnn.vo.responseVO;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class LoginUserVO {
+public class AttendanceVO {
 
-    private Integer id;
+    private Integer userId;
 
     private String username;
 
-    private String password;
+    private Integer activityId;
 
-    private Integer role;
-
-    private String token;
+    private String activityName;
+    /**
+     * 签到状态
+     */
+    private Integer state;
 
 }

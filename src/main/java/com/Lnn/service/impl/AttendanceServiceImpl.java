@@ -4,10 +4,12 @@ import com.Lnn.entity.Attendance;
 
 import com.Lnn.mapper.AttendanceMapper;
 import com.Lnn.service.AttendanceService;
+import com.Lnn.vo.responseVO.AttendanceVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (Attendance)表服务实现类
@@ -23,24 +25,21 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     //查询活动签到情况
     @Override
-    public Attendance inquireByActivity(int activityId) {
-        Attendance attendance = attendanceMapper.inquireByActivity(activityId);
-        return attendance;
+    public List<AttendanceVO> inquireByActivity(Integer activityId) {
+        return attendanceMapper.inquireByActivity(activityId);
     }
 
     //查询用户签到情况
     @Override
-    public Attendance inquireByUser(int userId) {
-        Attendance attendance = attendanceMapper.inquireByUser(userId);
+    public List<AttendanceVO> inquireByUser(Integer userId) {
 
-        return attendance;
+        return attendanceMapper.inquireByUser(userId);
     }
 
     //更新签到状态
     @Override
-    public Attendance update(String state,int userId) {
+    public AttendanceVO update(Integer userId,Integer activityId,Integer state) {
 
-        Attendance attendance = attendanceMapper.update(state,userId);
-        return attendance;
+        return attendanceMapper.update(userId,activityId,state);
     }
 }

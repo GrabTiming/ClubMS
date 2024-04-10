@@ -10,10 +10,10 @@ import com.Lnn.result.PageResult;
 import com.Lnn.result.RestBean;
 import com.Lnn.service.ClubService;
 import com.Lnn.util.Constant;
-import com.Lnn.vo.requestVO.ClubApplicationCreateVO;
-import com.Lnn.vo.requestVO.ClubCreateVO;
-import com.Lnn.vo.requestVO.UpdateClubApplicationVO;
+import com.Lnn.util.JwtProperties;
+import com.Lnn.vo.requestVO.*;
 import com.Lnn.vo.responseVO.ClubApplicationVO;
+import com.Lnn.vo.responseVO.SignStateVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.bcel.Const;
 import org.apiguardian.api.API;
@@ -32,8 +32,6 @@ public class ClubController {
     @Autowired
     private ClubService clubService;
 
-    @Autowired
-    private UserClubMapper userClubMapper;
 
     /**
      * 分页查询所有的社团
@@ -45,6 +43,7 @@ public class ClubController {
         System.out.println(pageResult);
         return RestBean.success(pageResult,"社团查询成功");
     }
+
 
 
     /**
@@ -72,6 +71,31 @@ public class ClubController {
         PageResult pageResult = clubService.getAllClubIncluded(userClubQueryDTO);
         System.out.println(pageResult);
         return RestBean.success(pageResult,"社团查询成功");
+    }
+
+    /**
+     * 申请加入社团
+     */
+    @PostMapping("/signIn")
+    public RestBean signIn(@RequestBody ClubSignInVO clubSignInVO)
+    {
+        return clubService.addSignIn(clubSignInVO);
+    }
+
+
+    @PostMapping("/updateSignIn")
+    public RestBean updateSignIn(@RequestBody UpdateSignInVO updateSignInVO)
+    {
+        clubService.updateSignIn(updateSignInVO);
+        return RestBean.success();
+    }
+
+
+    //根据社团id 返回 加入这个社团的申请
+    @GetMapping("/club-signIn/{clubId}")
+    public RestBean<List<SignStateVO>> getSignInByClubId(@PathVariable("clubId") Integer clubId)
+    {
+        return RestBean.success(clubService.getSignInByClubId(clubId));
     }
 
 

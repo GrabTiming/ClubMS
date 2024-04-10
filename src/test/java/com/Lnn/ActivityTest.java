@@ -59,7 +59,7 @@ public class ActivityTest {
     @Test
     public void ActivityRegister()
     {
-        ActivityRegisterVO vo = new ActivityRegisterVO("Lnn","全国第二十届数学竞赛",Constant.ACTIVITY_DEFAULT_STATUS);
+        ActivityRegisterVO vo = new ActivityRegisterVO(4,"Lnn","全国第二十届数学竞赛",Constant.DEFAULT_STATUS);
         activityService.addUserRegister(vo);
     }
 

@@ -29,6 +29,8 @@ public class Constant {
     //活动报名成功 状态字
     public static final Integer ACCESS_STATUS = 2;
 
+    public static  String TOKEN =null ;
+
 
 
 
