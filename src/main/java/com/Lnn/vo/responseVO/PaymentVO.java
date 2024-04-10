@@ -19,7 +19,6 @@ public class PaymentVO {
 
     private Double cost;
 
-
     private Integer state;
 
 }

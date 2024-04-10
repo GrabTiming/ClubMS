@@ -19,7 +19,7 @@
     </insert>
 
     <select id="getPaymentByUserId" resultType="com.Lnn.vo.responseVO.PaymentVO">
-        select user_id,username, activity_id,name activityName, p.cost, state
+        select user_id,username, activity_id,name activityName, p.cost,p.state
         from  payment p left join user u on p.user_id = u.id
                         left join activity a on p.activity_id = a.id
         where user_id = #{userId}
